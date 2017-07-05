@@ -27,7 +27,11 @@ public class MencariData {
             }
         }*/
         
-        
+                    String stringValue = "1,000";
+
+            String cleanedStringValue = stringValue.replace(",", "");
+            int intValue = Integer.parseInt(cleanedStringValue);
+            System.out.println(intValue);
         //pikirin GUInya sekarang
     }
     

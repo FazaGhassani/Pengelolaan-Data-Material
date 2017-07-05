@@ -18,7 +18,7 @@ public final class Name_Searcher {
     private XSSFSheet mySheet;
     
     public Name_Searcher() throws FileNotFoundException, IOException{
-            File myFile = findFile("C:\\", "Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
+            File myFile = findFile("C:\\", "Daftar_Harga_PO.xlsx");
             //("E://Ganis/KP/Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
             FileInputStream fis = new FileInputStream(myFile);
 
@@ -63,7 +63,7 @@ public final class Name_Searcher {
                     String cellValue =  null;
                     String cellValuemaynull = null;
                     
-                    XSSFCell cell = row.getCell(0);
+                    XSSFCell cell = row.getCell(1);
                     if(cell!=null){
                         //this part will split every word in one cell
                         String[] splited = cell.getStringCellValue().split("\\b+");
@@ -72,18 +72,22 @@ public final class Name_Searcher {
                             if(spliteds.toLowerCase().contains(name.toLowerCase())){
                                 int columndatal = 0;
 
-                                //Nama Barang
-                                datal[rowdatal][columndatal] = row.getCell(0).getStringCellValue();
-                                columndatal++;
-                            
-                                //satuan
+                                //Uraian Pekerjaan
                                 datal[rowdatal][columndatal] = row.getCell(1).getStringCellValue();
                                 columndatal++;
                             
-                                //harga satuan
+                                //Volume
                                 datal[rowdatal][columndatal] = String.valueOf(row.getCell(2).getNumericCellValue());
                                 columndatal++;
                             
+                                //Satuan
+                                datal[rowdatal][columndatal] = row.getCell(3).getStringCellValue();
+                                columndatal++;
+                                
+                                //harga satuan
+                                datal[rowdatal][columndatal] = String.format(Locale.US, "%,d", (long) row.getCell(4).getNumericCellValue()).replace(',', '.');
+                                columndatal++;
+                                
                                 //add rowdata
                                 rowdatal++;
                             }

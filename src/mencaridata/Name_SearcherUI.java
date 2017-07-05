@@ -7,6 +7,7 @@ package mencaridata;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +45,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         jButton_HapusPilihan = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_materialpilihan = new javax.swing.JTable();
+        jButton_hitung = new javax.swing.JButton();
         jPanel_Pencarian = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabel_HasilCari = new javax.swing.JTable();
@@ -74,14 +76,14 @@ public class Name_SearcherUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nama Barang", "Satuan", "Harga satuan"
+                "Uraian Pekerjaan", "Volume", "Unit/Satuan", "Harga Satuan", "Sub Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, true, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -92,32 +94,44 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable_materialpilihan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTable_materialpilihanKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable_materialpilihan);
+
+        jButton_hitung.setText("Hitung");
 
         javax.swing.GroupLayout jPanel_hasilLayout = new javax.swing.GroupLayout(jPanel_hasil);
         jPanel_hasil.setLayout(jPanel_hasilLayout);
         jPanel_hasilLayout.setHorizontalGroup(
             jPanel_hasilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_hasilLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_HapusPilihan)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_simpankeexcel)
-                .addContainerGap())
             .addGroup(jPanel_hasilLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel_hasilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_hasilLayout.createSequentialGroup()
+                        .addGap(0, 226, Short.MAX_VALUE)
+                        .addComponent(jButton_HapusPilihan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_hitung, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_hasilLayout.createSequentialGroup()
+                        .addComponent(jButton_simpankeexcel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel_hasilLayout.setVerticalGroup(
             jPanel_hasilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_hasilLayout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(7, 7, 7)
+                .addComponent(jButton_simpankeexcel)
+                .addGap(7, 7, 7)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_hasilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_simpankeexcel)
-                    .addComponent(jButton_HapusPilihan))
+                    .addComponent(jButton_HapusPilihan)
+                    .addComponent(jButton_hitung))
                 .addContainerGap())
         );
 
@@ -128,14 +142,14 @@ public class Name_SearcherUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nama Barang", "Satuan", "Harga Satuan"
+                "Uraian Pekerjaan", "Volume", "Unit/Satuan", "Harga Satuan"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -173,13 +187,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                         .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_Cari)
-                        .addContainerGap(184, Short.MAX_VALUE))
-                    .addGroup(jPanel_PencarianLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_PencarianLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_input, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 174, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_PencarianLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton_input, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel_PencarianLayout.setVerticalGroup(
@@ -190,7 +202,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                     .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Cari))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_input)
                 .addContainerGap())
@@ -256,10 +268,17 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_CariActionPerformed
 
     private void jButton_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inputActionPerformed
+        //INGAT!!! HASIL BERUBAH MENJADI VARIABLE VECTOR, (VECTOR = MIRIP DENGAN ARRAYLIST[])
         if(Tabel_HasilCari.getSelectedRow() != -1){
             Vector pilihan = (Vector) model1.getDataVector().elementAt(Tabel_HasilCari.getSelectedRow());
             model2.addRow(pilihan);
-            //INGAT!!! HASIL BERUBAH MENJADI VARIABLE VECTOR, (VECTOR = MIRIP DENGAN ARRAYLIST[])
+            
+            //convert dari vector ke string ke int
+            //untunk perhitungan
+            String cleanedStringValue2 = String.valueOf(pilihan.get(3)).replace(".", "");
+            Object intValue1 = String.format(Locale.US, "%,d", 1 * Long.parseLong(cleanedStringValue2)).replace(',', '.');
+            model2.setValueAt(intValue1, model2.getRowCount()-1, model2.getColumnCount()-1);
+            
         }else{
             JOptionPane.showMessageDialog(null, "SILAHKAN PILIH MATERIAL YANG AKAN DIMASUKAN", " ", JOptionPane.WARNING_MESSAGE);
         }
@@ -274,9 +293,14 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_HapusPilihanActionPerformed
 
     private void jButton_simpankeexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_simpankeexcelActionPerformed
+        //get the data first from table 2 or model 2 you name it
         //https://stackoverflow.com/questions/24862127/writing-a-huge-data-2d-array-to-excel-file-using-java-poi
         //https://stackoverflow.com/questions/7500259/how-to-convert-vector-to-string-array-in-java
     }//GEN-LAST:event_jButton_simpankeexcelActionPerformed
+
+    private void jTable_materialpilihanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_materialpilihanKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable_materialpilihanKeyPressed
 
     /**
      * @param args the command line arguments
@@ -317,6 +341,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     private javax.swing.JTable Tabel_HasilCari;
     private javax.swing.JButton jButton_Cari;
     private javax.swing.JButton jButton_HapusPilihan;
+    private javax.swing.JButton jButton_hitung;
     private javax.swing.JButton jButton_input;
     private javax.swing.JButton jButton_simpankeexcel;
     private javax.swing.JPanel jPanel_Pencarian;
