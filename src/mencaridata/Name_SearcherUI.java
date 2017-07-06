@@ -102,6 +102,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable_materialpilihan);
 
         jButton_hitung.setText("Hitung");
+        jButton_hitung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_hitungActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel_hasilLayout = new javax.swing.GroupLayout(jPanel_hasil);
         jPanel_hasil.setLayout(jPanel_hasilLayout);
@@ -110,15 +115,15 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             .addGroup(jPanel_hasilLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel_hasilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_hasilLayout.createSequentialGroup()
-                        .addGap(0, 226, Short.MAX_VALUE)
-                        .addComponent(jButton_HapusPilihan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_hitung, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_hasilLayout.createSequentialGroup()
                         .addComponent(jButton_simpankeexcel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_hasilLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton_HapusPilihan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_hitung, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel_hasilLayout.setVerticalGroup(
@@ -126,7 +131,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_hasilLayout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addComponent(jButton_simpankeexcel)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_hasilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -202,7 +207,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                     .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Cari))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_input)
                 .addContainerGap())
@@ -301,6 +306,51 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     private void jTable_materialpilihanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_materialpilihanKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable_materialpilihanKeyPressed
+
+    private void jButton_hitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_hitungActionPerformed
+        if(model2.getValueAt(model2.getRowCount()-1, 3)=="Total: "){
+            model2.removeRow(model2.getRowCount()-1);
+        }
+        
+        Vector<String> vable = (Vector) model2.getDataVector();
+        Vector vable2 =  new Vector();
+        int hit1=0; long hit2=0; long hasil=0; long total=0;
+        
+        for(Object v : vable){
+            Vector vecrow = (Vector) v;
+            String scValue2 = String.valueOf(vecrow.get(3)).replace(".", "");
+            hit2=Long.parseLong(scValue2);
+            
+            //cek kalau dia 1.0 atau bukan lalu ubah ke int
+            if("1.0".equals(vecrow.get(1))){
+                hit1=1;
+            }else{
+                hit1=(int) vecrow.get(1);
+            }
+            
+            hasil = hit1 * hit2;
+            total = total+hasil;
+            vecrow.remove(4);
+            Object intValue1 = String.format(Locale.US, "%,d", 1 * hasil).replace(',', '.');
+            vecrow.add(intValue1);
+            vable2.add(vecrow);
+        }
+        
+        
+        if(model2.getRowCount()>0){
+            while(model2.getRowCount()>0){
+                model2.removeRow(0);
+            }
+        }
+        
+        for(Object v : vable2){
+            model2.addRow((Vector) v);
+        }
+        
+        //menghitung total
+        model2.addRow(new Object[]{null,null,null,"Total: ",String.format(Locale.US, "%,d", 1 * total).replace(',', '.')});
+        
+    }//GEN-LAST:event_jButton_hitungActionPerformed
 
     /**
      * @param args the command line arguments

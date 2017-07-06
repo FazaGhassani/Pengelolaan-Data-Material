@@ -2,6 +2,7 @@ package mencaridata;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class MencariData {
 
@@ -26,12 +27,7 @@ public class MencariData {
             System.out.println("");
             }
         }*/
-        
-                    String stringValue = "1,000";
-
-            String cleanedStringValue = stringValue.replace(",", "");
-            int intValue = Integer.parseInt(cleanedStringValue);
-            System.out.println(intValue);
+               
         //pikirin GUInya sekarang
     }
     
