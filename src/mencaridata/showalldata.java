@@ -44,43 +44,43 @@ public class showalldata {
         //source code : https://stackoverflow.com/questions/25422244/java-automatically-detecting-input-file-path
     }
 
-    public Vector<String> show(XSSFSheet mySheet, XSSFWorkbook myWorkBook) {
+    public String[][] show(XSSFSheet mySheet, XSSFWorkbook myWorkBook) {
         //could search up to 100 data
-        Vector datal = new Vector();
-        Vector<String> vcell = new Vector();
+        String[][] datal = new String[1001][5];
+        int rowdatal = 0;
 
         for (int rowIndex = 1; rowIndex <= mySheet.getLastRowNum(); rowIndex++) {
             //putting current row
             XSSFRow row = mySheet.getRow(rowIndex);
-
             //search every cell
             if (row != null) {
 
-                //variables for put the strings
-                String cellValue = null;
-                String cellValuemaynull = null;
-
                 XSSFCell cell = row.getCell(1);
                 if (cell != null) {
-                    vcell.removeAll(vcell);
+                    int columndatal = 0;
+
                     //Uraian Pekerjaan
-                    vcell.add(row.getCell(1).getStringCellValue());
+                    datal[rowdatal][columndatal] = row.getCell(1).getStringCellValue();
+                    columndatal++;
 
                     //Volume
-                    vcell.add(String.valueOf(row.getCell(2).getNumericCellValue()));
+                    datal[rowdatal][columndatal] = String.valueOf(row.getCell(2).getNumericCellValue());
+                    columndatal++;
 
                     //Satuan
-                    vcell.add(row.getCell(3).getStringCellValue());
+                    datal[rowdatal][columndatal] = row.getCell(3).getStringCellValue();
+                    columndatal++;
 
                     //harga satuan
-                    vcell.add(String.format(Locale.US, "%,d", (long) row.getCell(4).getNumericCellValue()).replace(',', '.'));
+                    datal[rowdatal][columndatal] = String.format(Locale.US, "%,d", (long) row.getCell(4).getNumericCellValue()).replace(',', '.');
+                    columndatal++;
+
+                    //add rowdata
+                    rowdatal++;
                 }
             }
-            
-            //simpan ke data1
-            datal.add(vcell);
-            System.out.println(datal);
         }
+
         return datal;
     }
 

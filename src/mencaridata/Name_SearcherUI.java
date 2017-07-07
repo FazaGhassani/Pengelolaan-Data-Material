@@ -32,16 +32,19 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         initComponents();
         model1 = (DefaultTableModel) Tabel_HasilCari.getModel();
         model2 = (DefaultTableModel) jTable_materialpilihan.getModel();
-        
+
         //menampilkan semua data
         showalldata show = new showalldata();
-        Vector<String> data1 = show.show(show.getmySheet(), show.getmyWorkBook());
-        for(Object v : data1){
-            model1.addRow((Vector) v);
+        String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
+        for (int row = 0; row < data1.length; row++) {
+            if (data1[row][0] != null) {
+                model1.addRow(data1[row]);
+                row++;
+            }
         }
     }
 
-    @SuppressWarnings("unchecked")
+        @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
