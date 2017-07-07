@@ -5,9 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 import org.apache.poi.ss.usermodel.Cell; 
-import org.apache.poi.ss.usermodel.Row; 
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet; 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -46,11 +44,25 @@ public class write2class {
         System.out.println(str);
         System.out.println(FILE_NAME);
         int rnmb = 0; //for loop row
+        
+        // making 1 row for showing table content
+        Row row = this.mySheet.createRow(rnmb++);
+        Cell cells = row.createCell(0);
+        cells.setCellValue((String) "Uraian Pekerjaan");
+        cells = row.createCell(1);
+        cells.setCellValue((String) "Volume");
+        cells = row.createCell(2);
+        cells.setCellValue((String) "Unit/Satuan");
+        cells = row.createCell(3);
+        cells.setCellValue((String) "Harga Satuan");
+        cells = row.createCell(4);
+        cells.setCellValue((String) "Total");
+           
         for (Object i : v) {
             Vector<String> vecrow = (Vector<String>) i; //so the object can be loop
 
-            Row row = this.mySheet.createRow(rnmb++); //creating new row
-
+            row = this.mySheet.createRow(rnmb++); //creating new row
+            
             int cnmb = 0;
             for (Object ii : vecrow) {
                 Cell cell = row.createCell(cnmb++); //creating new cell in the row

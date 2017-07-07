@@ -8,12 +8,12 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public final class Name_Searcher {
+public class showalldata {
 
     private XSSFWorkbook myWorkBook;
     private XSSFSheet mySheet;
 
-    public Name_Searcher() throws FileNotFoundException, IOException {
+    public showalldata() throws FileNotFoundException, IOException {
         File myFile = findFile("C:\\", "Daftar_Harga_PO.xlsx");
 
         FileInputStream fis = new FileInputStream(myFile);
@@ -26,7 +26,6 @@ public final class Name_Searcher {
 
     }
 
-    //untuk mencari file di C
     private static File findFile(final String rootFilePath, final String fileToBeFound) {
 
         File rootFile = new File(rootFilePath);
@@ -45,54 +44,43 @@ public final class Name_Searcher {
         //source code : https://stackoverflow.com/questions/25422244/java-automatically-detecting-input-file-path
     }
 
-    //searching by name
-    public String[][] Search_by_name(XSSFSheet mySheet, XSSFWorkbook myWorkBook, String name) {
+    public Vector<String> show(XSSFSheet mySheet, XSSFWorkbook myWorkBook) {
         //could search up to 100 data
-        String[][] datal = new String[101][5];
-        int rowdatal = 0;
+        Vector datal = new Vector();
+        Vector<String> vcell = new Vector();
 
-        for (int rowIndex = 0; rowIndex <= mySheet.getLastRowNum(); rowIndex++) {
+        for (int rowIndex = 1; rowIndex <= mySheet.getLastRowNum(); rowIndex++) {
             //putting current row
             XSSFRow row = mySheet.getRow(rowIndex);
+
             //search every cell
             if (row != null) {
+
                 //variables for put the strings
                 String cellValue = null;
                 String cellValuemaynull = null;
 
                 XSSFCell cell = row.getCell(1);
                 if (cell != null) {
-                    //this part will split every word in one cell
-                    String[] splited = cell.getStringCellValue().split("\\b+");
+                    vcell.removeAll(vcell);
+                    //Uraian Pekerjaan
+                    vcell.add(row.getCell(1).getStringCellValue());
 
-                    for (String spliteds : splited) {
-                        if (spliteds.toLowerCase().contains(name.toLowerCase())) {
-                            int columndatal = 0;
+                    //Volume
+                    vcell.add(String.valueOf(row.getCell(2).getNumericCellValue()));
 
-                            //Uraian Pekerjaan
-                            datal[rowdatal][columndatal] = row.getCell(1).getStringCellValue();
-                            columndatal++;
+                    //Satuan
+                    vcell.add(row.getCell(3).getStringCellValue());
 
-                            //Volume
-                            datal[rowdatal][columndatal] = String.valueOf(row.getCell(2).getNumericCellValue());
-                            columndatal++;
-
-                            //Satuan
-                            datal[rowdatal][columndatal] = row.getCell(3).getStringCellValue();
-                            columndatal++;
-
-                            //harga satuan
-                            datal[rowdatal][columndatal] = String.format(Locale.US, "%,d", (long) row.getCell(4).getNumericCellValue()).replace(',', '.');
-                            columndatal++;
-
-                            //add rowdata
-                            rowdatal++;
-                        }
-                    }
+                    //harga satuan
+                    vcell.add(String.format(Locale.US, "%,d", (long) row.getCell(4).getNumericCellValue()).replace(',', '.'));
                 }
             }
+            
+            //simpan ke data1
+            datal.add(vcell);
+            System.out.println(datal);
         }
-
         return datal;
     }
 
