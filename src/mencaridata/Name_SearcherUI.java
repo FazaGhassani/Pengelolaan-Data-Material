@@ -305,7 +305,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_HapusPilihanActionPerformed
 
     private void jButton_simpankeexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_simpankeexcelActionPerformed
-        if (jTable_materialpilihan.getSelectedRow() != -1) {
+        if (model2.getRowCount() != 0) {
             write2class a = new write2class();
             String path = null;
             //ngambil data dari tabel 2 (atau model 2)
@@ -345,50 +345,53 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_materialpilihanKeyPressed
 
     private void jButton_hitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_hitungActionPerformed
-        if (model2.getValueAt(model2.getRowCount() - 1, 3) == "Total: ") {
-            model2.removeRow(model2.getRowCount() - 1);
-        }
-
-        Vector<String> vable = (Vector) model2.getDataVector();
-        Vector vable2 = new Vector();
-        int hit1 = 0;
-        long hit2 = 0;
-        long hasil = 0;
-        long total = 0;
-
-        for (Object v : vable) {
-            Vector vecrow = (Vector) v;
-            String scValue2 = String.valueOf(vecrow.get(3)).replace(".", "");
-            hit2 = Long.parseLong(scValue2);
-
-            //cek kalau dia 1.0 atau bukan lalu ubah ke int
-            if ("1.0".equals(vecrow.get(1))) {
-                hit1 = 1;
-            } else {
-                hit1 = (int) vecrow.get(1);
+        if (model2.getRowCount() != 0) {
+            if (model2.getValueAt(model2.getRowCount() - 1, 3) == "Total: ") {
+                model2.removeRow(model2.getRowCount() - 1);
             }
 
-            hasil = hit1 * hit2;
-            total = total + hasil;
-            vecrow.remove(4);
-            Object intValue1 = String.format(Locale.US, "%,d", 1 * hasil).replace(',', '.');
-            vecrow.add(intValue1);
-            vable2.add(vecrow);
-        }
+            Vector<String> vable = (Vector) model2.getDataVector();
+            Vector vable2 = new Vector();
+            int hit1 = 0;
+            long hit2 = 0;
+            long hasil = 0;
+            long total = 0;
 
-        if (model2.getRowCount() > 0) {
-            while (model2.getRowCount() > 0) {
-                model2.removeRow(0);
+            for (Object v : vable) {
+                Vector vecrow = (Vector) v;
+                String scValue2 = String.valueOf(vecrow.get(3)).replace(".", "");
+                hit2 = Long.parseLong(scValue2);
+
+                //cek kalau dia 1.0 atau bukan lalu ubah ke int
+                if ("1.0".equals(vecrow.get(1))) {
+                    hit1 = 1;
+                } else {
+                    hit1 = (int) vecrow.get(1);
+                }
+
+                hasil = hit1 * hit2;
+                total = total + hasil;
+                vecrow.remove(4);
+                Object intValue1 = String.format(Locale.US, "%,d", 1 * hasil).replace(',', '.');
+                vecrow.add(intValue1);
+                vable2.add(vecrow);
             }
+
+            if (model2.getRowCount() > 0) {
+                while (model2.getRowCount() > 0) {
+                    model2.removeRow(0);
+                }
+            }
+
+            for (Object v : vable2) {
+                model2.addRow((Vector) v);
+            }
+
+            //menghitung total
+            model2.addRow(new Object[]{null, null, null, "Total: ", String.format(Locale.US, "%,d", 1 * total).replace(',', '.')});
+        } else {
+            JOptionPane.showMessageDialog(null, "MASUKAN DATA TERLEBIH DAHULU", "", JOptionPane.WARNING_MESSAGE);
         }
-
-        for (Object v : vable2) {
-            model2.addRow((Vector) v);
-        }
-
-        //menghitung total
-        model2.addRow(new Object[]{null, null, null, "Total: ", String.format(Locale.US, "%,d", 1 * total).replace(',', '.')});
-
     }//GEN-LAST:event_jButton_hitungActionPerformed
 
     /**

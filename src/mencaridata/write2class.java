@@ -54,7 +54,11 @@ public class write2class {
             int cnmb = 0;
             for (Object ii : vecrow) {
                 Cell cell = row.createCell(cnmb++); //creating new cell in the row
-                cell.setCellValue((String) ii); //put the value on that cell
+                if (ii instanceof String) {
+                    cell.setCellValue((String) ii);
+                } else if (ii instanceof Integer) {
+                    cell.setCellValue((Integer) ii);
+                }//put the value on that cell
             }
         }
 
