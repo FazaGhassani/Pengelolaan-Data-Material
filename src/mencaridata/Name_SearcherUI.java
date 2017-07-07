@@ -5,12 +5,14 @@
  */
 package mencaridata;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,10 +27,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
      */
     DefaultTableModel model1;
     DefaultTableModel model2;
+
     public Name_SearcherUI() {
         initComponents();
-        model1=(DefaultTableModel) Tabel_HasilCari.getModel();
-        model2=(DefaultTableModel) jTable_materialpilihan.getModel();
+        model1 = (DefaultTableModel) Tabel_HasilCari.getModel();
+        model2 = (DefaultTableModel) jTable_materialpilihan.getModel();
     }
 
     /**
@@ -238,69 +241,103 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_CariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CariActionPerformed
-        //mencari nama dr kotak Cari_Nama
-        String nama = jTextField_CariNama.getText();
-        Name_Searcher a = null;
-        
-        try {
-            a = new Name_Searcher();
-        } catch (IOException ex) {
-            Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        //ditampung di string ini
-        String s[][] = a.Search_by_name(a.getmySheet(), a.getmyWorkBook(), nama);
-        
-        //menghapus data di tabel hasil pencarian kalau ada isinya
-        if(model1.getRowCount()>0){
-            while(model1.getRowCount()>0){
-                model1.removeRow(0);
+        if (jTextField_CariNama.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "MASUKAN KATA KUNCI PENCARIAN TERLEBIH DAHULU", " ", JOptionPane.WARNING_MESSAGE);
+        } else {
+            //mencari nama dr kotak Cari_Nama
+            String nama = jTextField_CariNama.getText();
+            Name_Searcher a = null;
+
+            try {
+                a = new Name_Searcher();
+            } catch (IOException ex) {
+                Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        
-        //mencoba menampilkan hasil pencarian
-        if(s[0][0]==null){
-            JOptionPane.showMessageDialog(null, "TIDAK MENEMUKAN DATA YANG COCOK", " ", JOptionPane.WARNING_MESSAGE);
-        }else{
-            //tampilkan nama yang sesuai di tabel
-            for (int row = 0; row <  s.length; row++){
-                if(s[row][0] != null){
-                    model1.addRow(s[row]); row++;
+
+            //ditampung di string ini
+            String s[][] = a.Search_by_name(a.getmySheet(), a.getmyWorkBook(), nama);
+
+            //menghapus data di tabel hasil pencarian kalau ada isinya
+            if (model1.getRowCount() > 0) {
+                while (model1.getRowCount() > 0) {
+                    model1.removeRow(0);
+                }
+            }
+
+            //mencoba menampilkan hasil pencarian
+            if (s[0][0] == null) {
+                JOptionPane.showMessageDialog(null, "TIDAK MENEMUKAN DATA YANG COCOK", " ", JOptionPane.WARNING_MESSAGE);
+            } else {
+                //tampilkan nama yang sesuai di tabel
+                for (int row = 0; row < s.length; row++) {
+                    if (s[row][0] != null) {
+                        model1.addRow(s[row]);
+                        row++;
+                    }
                 }
             }
         }
-        
     }//GEN-LAST:event_jButton_CariActionPerformed
 
     private void jButton_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inputActionPerformed
         //INGAT!!! HASIL BERUBAH MENJADI VARIABLE VECTOR, (VECTOR = MIRIP DENGAN ARRAYLIST[])
-        if(Tabel_HasilCari.getSelectedRow() != -1){
+        if (Tabel_HasilCari.getSelectedRow() != -1) {
             Vector pilihan = (Vector) model1.getDataVector().elementAt(Tabel_HasilCari.getSelectedRow());
             model2.addRow(pilihan);
-            
+
             //convert dari vector ke string ke int
             //untunk perhitungan
             String cleanedStringValue2 = String.valueOf(pilihan.get(3)).replace(".", "");
             Object intValue1 = String.format(Locale.US, "%,d", 1 * Long.parseLong(cleanedStringValue2)).replace(',', '.');
-            model2.setValueAt(intValue1, model2.getRowCount()-1, model2.getColumnCount()-1);
-            
-        }else{
+            model2.setValueAt(intValue1, model2.getRowCount() - 1, model2.getColumnCount() - 1);
+
+        } else {
             JOptionPane.showMessageDialog(null, "SILAHKAN PILIH MATERIAL YANG AKAN DIMASUKAN", " ", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton_inputActionPerformed
 
     private void jButton_HapusPilihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HapusPilihanActionPerformed
-        if(jTable_materialpilihan.getSelectedRow() != -1){
+        if (jTable_materialpilihan.getSelectedRow() != -1) {
             model2.removeRow(jTable_materialpilihan.getSelectedRow());
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "SILAHKAN PILIH MATERIAL YANG AKAN DIHAPUS", " ", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton_HapusPilihanActionPerformed
 
     private void jButton_simpankeexcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_simpankeexcelActionPerformed
-        //get the data first from table 2 or model 2 you name it
-        //https://stackoverflow.com/questions/24862127/writing-a-huge-data-2d-array-to-excel-file-using-java-poi
-        //https://stackoverflow.com/questions/7500259/how-to-convert-vector-to-string-array-in-java
+        if (jTable_materialpilihan.getSelectedRow() != -1) {
+            write2class a = new write2class();
+            String path = null;
+            //ngambil data dari tabel 2 (atau model 2)
+            Vector<String> vable1 = (Vector) model2.getDataVector();
+
+            //poping up JOPtionPane to get excel name by user
+            String name = JOptionPane.showInputDialog(null, "Masukan nama Excel: ", "");
+
+            //to open JFileChooser so user can choose spesific path to save file
+            JFileChooser chooser = new JFileChooser();
+            chooser.setCurrentDirectory(new java.io.File("."));
+            chooser.setDialogTitle("Simpan di ...");
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            chooser.setAcceptAllFileFilterUsed(false);
+
+            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                path = chooser.getSelectedFile().getAbsolutePath();
+                //chooser.getSelectedFile(); //to get selected file
+                //getCurrentDirectory() // to get current dir
+            } else {
+                System.out.println("");
+            }
+
+            try {
+                a.write2excel(vable1, path, name);
+                JOptionPane.showMessageDialog(null, "DATA BERHASIL DIMASUKAN", "", JOptionPane.INFORMATION_MESSAGE);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "MASUKAN DATA TERLEBIH DAHULU", "", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_simpankeexcelActionPerformed
 
     private void jTable_materialpilihanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_materialpilihanKeyPressed
@@ -308,48 +345,50 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_materialpilihanKeyPressed
 
     private void jButton_hitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_hitungActionPerformed
-        if(model2.getValueAt(model2.getRowCount()-1, 3)=="Total: "){
-            model2.removeRow(model2.getRowCount()-1);
+        if (model2.getValueAt(model2.getRowCount() - 1, 3) == "Total: ") {
+            model2.removeRow(model2.getRowCount() - 1);
         }
-        
+
         Vector<String> vable = (Vector) model2.getDataVector();
-        Vector vable2 =  new Vector();
-        int hit1=0; long hit2=0; long hasil=0; long total=0;
-        
-        for(Object v : vable){
+        Vector vable2 = new Vector();
+        int hit1 = 0;
+        long hit2 = 0;
+        long hasil = 0;
+        long total = 0;
+
+        for (Object v : vable) {
             Vector vecrow = (Vector) v;
             String scValue2 = String.valueOf(vecrow.get(3)).replace(".", "");
-            hit2=Long.parseLong(scValue2);
-            
+            hit2 = Long.parseLong(scValue2);
+
             //cek kalau dia 1.0 atau bukan lalu ubah ke int
-            if("1.0".equals(vecrow.get(1))){
-                hit1=1;
-            }else{
-                hit1=(int) vecrow.get(1);
+            if ("1.0".equals(vecrow.get(1))) {
+                hit1 = 1;
+            } else {
+                hit1 = (int) vecrow.get(1);
             }
-            
+
             hasil = hit1 * hit2;
-            total = total+hasil;
+            total = total + hasil;
             vecrow.remove(4);
             Object intValue1 = String.format(Locale.US, "%,d", 1 * hasil).replace(',', '.');
             vecrow.add(intValue1);
             vable2.add(vecrow);
         }
-        
-        
-        if(model2.getRowCount()>0){
-            while(model2.getRowCount()>0){
+
+        if (model2.getRowCount() > 0) {
+            while (model2.getRowCount() > 0) {
                 model2.removeRow(0);
             }
         }
-        
-        for(Object v : vable2){
+
+        for (Object v : vable2) {
             model2.addRow((Vector) v);
         }
-        
+
         //menghitung total
-        model2.addRow(new Object[]{null,null,null,"Total: ",String.format(Locale.US, "%,d", 1 * total).replace(',', '.')});
-        
+        model2.addRow(new Object[]{null, null, null, "Total: ", String.format(Locale.US, "%,d", 1 * total).replace(',', '.')});
+
     }//GEN-LAST:event_jButton_hitungActionPerformed
 
     /**

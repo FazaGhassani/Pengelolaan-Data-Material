@@ -19,7 +19,7 @@ public final class Name_Searcher {
     
     public Name_Searcher() throws FileNotFoundException, IOException{
             File myFile = findFile("C:\\", "Daftar_Harga_PO.xlsx");
-            //("E://Ganis/KP/Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
+            
             FileInputStream fis = new FileInputStream(myFile);
 
             // Finds the workbook instance for XLSX file
@@ -27,6 +27,7 @@ public final class Name_Searcher {
            
             // Return first sheet from the XLSX workbook
             setmySheet(0);
+            
     }
     
     //untuk mencari file di C
@@ -123,13 +124,9 @@ public final class Name_Searcher {
         return datal;
     }
     
-    //masukin data yang ingin dimasukin, masukan ke excel baru
-    public void write2excel(){
-        
-        
-    }
     
-    //setter getter
+    ////////////////////////////////////////////////////////////////////////////
+    /////////////////////setter getter//////////////////////////////////////////
     public XSSFWorkbook getmyWorkBook(){
         return myWorkBook;
     }
@@ -145,4 +142,7 @@ public final class Name_Searcher {
     public void setmySheet(int i){
         mySheet = myWorkBook.getSheetAt(i);
     }
+    
+    /////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
 }
