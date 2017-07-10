@@ -56,7 +56,7 @@ public class write2class {
         cells = row.createCell(3);
         cells.setCellValue((String) "Harga Satuan");
         cells = row.createCell(4);
-        cells.setCellValue((String) "Total");
+        cells.setCellValue((String) "Sub-total");
            
         for (Object i : v) {
             Vector<String> vecrow = (Vector<String>) i; //so the object can be loop

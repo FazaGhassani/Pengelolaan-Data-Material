@@ -5,6 +5,9 @@
  */
 package mencaridata;
 
+import java.awt.Button;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
@@ -44,7 +47,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         }
     }
 
-        @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -62,8 +65,10 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         jButton_input = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1366, 768));
 
         jPanel_hasil.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Data Material", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel_hasil.setPreferredSize(new java.awt.Dimension(500, 500));
 
         jButton_simpankeexcel.setText("Simpan ke Excel");
         jButton_simpankeexcel.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +131,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                     .addGroup(jPanel_hasilLayout.createSequentialGroup()
                         .addComponent(jButton_simpankeexcel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_hasilLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton_HapusPilihan)
@@ -149,6 +154,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         );
 
         jPanel_Pencarian.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pencarian", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel_Pencarian.setPreferredSize(new java.awt.Dimension(500, 500));
 
         Tabel_HasilCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,8 +206,8 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                         .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_Cari)
-                        .addGap(0, 174, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_PencarianLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton_input, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -215,7 +221,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                     .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Cari))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_input)
                 .addContainerGap())
@@ -228,7 +234,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel_Pencarian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_hasil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -247,6 +253,28 @@ public class Name_SearcherUI extends javax.swing.JFrame {
 
     private void jButton_CariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CariActionPerformed
         if (jTextField_CariNama.getText().equals("")) {
+            
+            //menghapus data di tabel hasil pencarian kalau ada isinya
+            if (model1.getRowCount() > 0) {
+                while (model1.getRowCount() > 0) {
+                    model1.removeRow(0);
+                }
+            }
+            
+            showalldata show = null;
+            try {
+                show = new showalldata();
+            } catch (IOException ex) {
+                Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
+            for (int row = 0; row < data1.length; row++) {
+                if (data1[row][0] != null) {
+                    model1.addRow(data1[row]);
+                    row++;
+                }
+            }
             JOptionPane.showMessageDialog(null, "MASUKAN KATA KUNCI PENCARIAN TERLEBIH DAHULU", " ", JOptionPane.WARNING_MESSAGE);
         } else {
             //mencari nama dr kotak Cari_Nama
@@ -287,6 +315,10 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     private void jButton_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_inputActionPerformed
         //INGAT!!! HASIL BERUBAH MENJADI VARIABLE VECTOR, (VECTOR = MIRIP DENGAN ARRAYLIST[])
         if (Tabel_HasilCari.getSelectedRow() != -1) {
+            if (model2.getRowCount() != 0 && model2.getValueAt(model2.getRowCount() - 1, 3) == "Total: ") {
+                model2.removeRow(model2.getRowCount() - 1);
+            }
+            
             Vector pilihan = (Vector) model1.getDataVector().elementAt(Tabel_HasilCari.getSelectedRow());
             model2.addRow(pilihan);
 
@@ -295,6 +327,9 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             String cleanedStringValue2 = String.valueOf(pilihan.get(3)).replace(".", "");
             Object intValue1 = String.format(Locale.US, "%,d", 1 * Long.parseLong(cleanedStringValue2)).replace(',', '.');
             model2.setValueAt(intValue1, model2.getRowCount() - 1, model2.getColumnCount() - 1);
+            
+            //memanggil button hitung
+            jButton_hitungActionPerformed(evt);
 
         } else {
             JOptionPane.showMessageDialog(null, "SILAHKAN PILIH MATERIAL YANG AKAN DIMASUKAN", " ", JOptionPane.WARNING_MESSAGE);
@@ -302,8 +337,10 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_inputActionPerformed
 
     private void jButton_HapusPilihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_HapusPilihanActionPerformed
-        if (jTable_materialpilihan.getSelectedRow() != -1) {
+        if (jTable_materialpilihan.getSelectedRow() != -1) {            
             model2.removeRow(jTable_materialpilihan.getSelectedRow());
+            //memanggil button hitung
+            jButton_hitungActionPerformed(evt);
         } else {
             JOptionPane.showMessageDialog(null, "SILAHKAN PILIH MATERIAL YANG AKAN DIHAPUS", " ", JOptionPane.WARNING_MESSAGE);
         }
@@ -346,7 +383,12 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_simpankeexcelActionPerformed
 
     private void jTable_materialpilihanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable_materialpilihanKeyPressed
-        // TODO add your handling code here:
+        //make a artificial button to creating actionevent
+        Button buttone = new Button();
+        //creating an actionevent
+        ActionEvent e = new ActionEvent((Object) buttone, ActionEvent.ACTION_PERFORMED,"");
+        //calling hitung fx
+        jButton_hitungActionPerformed(e);
     }//GEN-LAST:event_jTable_materialpilihanKeyPressed
 
     private void jButton_hitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_hitungActionPerformed
@@ -398,7 +440,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "MASUKAN DATA TERLEBIH DAHULU", "", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton_hitungActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
