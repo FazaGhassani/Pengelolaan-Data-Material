@@ -30,18 +30,29 @@ public class Name_SearcherUI extends javax.swing.JFrame {
      */
     DefaultTableModel model1;
     DefaultTableModel model2;
+    DefaultTableModel model3;
 
     public Name_SearcherUI() throws IOException {
         initComponents();
         model1 = (DefaultTableModel) Tabel_HasilCari.getModel();
         model2 = (DefaultTableModel) jTable_materialpilihan.getModel();
+        model3 = (DefaultTableModel) Tabel_HasilCari1.getModel();
 
-        //menampilkan semua data
-        showalldata show = new showalldata();
+        //menampilkan semua data di tab 1
+        showalldata show = new showalldata(1);
         String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
         for (int row = 0; row < data1.length; row++) {
             if (data1[row][0] != null) {
                 model1.addRow(data1[row]);
+                row++;
+            }
+        }
+        //menampilkan semua data di tab 2
+        showalldata show1 = new showalldata(2);
+        String[][] data2 = show1.show(show1.getmySheet(), show1.getmyWorkBook());
+        for (int row = 0; row < data2.length; row++) {
+            if (data1[row][0] != null) {
+                model3.addRow(data2[row]);
                 row++;
             }
         }
@@ -58,11 +69,19 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         jTable_materialpilihan = new javax.swing.JTable();
         jButton_hitung = new javax.swing.JButton();
         jPanel_Pencarian = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Tabel_HasilCari = new javax.swing.JTable();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         jTextField_CariNama = new javax.swing.JTextField();
         jButton_Cari = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tabel_HasilCari = new javax.swing.JTable();
         jButton_input = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jTextField_CariNama1 = new javax.swing.JTextField();
+        jButton_Cari1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Tabel_HasilCari1 = new javax.swing.JTable();
+        jButton_input1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -131,7 +150,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                     .addGroup(jPanel_hasilLayout.createSequentialGroup()
                         .addComponent(jButton_simpankeexcel)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 808, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_hasilLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton_HapusPilihan)
@@ -145,16 +164,29 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addComponent(jButton_simpankeexcel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel_hasilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_HapusPilihan)
                     .addComponent(jButton_hitung))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel_Pencarian.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pencarian", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         jPanel_Pencarian.setPreferredSize(new java.awt.Dimension(500, 500));
+
+        jTextField_CariNama.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_CariNamaKeyPressed(evt);
+            }
+        });
+
+        jButton_Cari.setText("Cari");
+        jButton_Cari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CariActionPerformed(evt);
+            }
+        });
 
         Tabel_HasilCari.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,13 +213,6 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Tabel_HasilCari);
 
-        jButton_Cari.setText("Cari");
-        jButton_Cari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_CariActionPerformed(evt);
-            }
-        });
-
         jButton_input.setText("Pilih");
         jButton_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,35 +220,126 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_Cari)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 310, Short.MAX_VALUE)
+                        .addComponent(jButton_input, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Cari))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_input)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Data Harga PO", jPanel1);
+
+        jButton_Cari1.setText("Cari");
+        jButton_Cari1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Cari1ActionPerformed(evt);
+            }
+        });
+
+        Tabel_HasilCari1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Uraian Pekerjaan", "Volume", "Unit/Satuan", "Harga Satuan"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(Tabel_HasilCari1);
+
+        jButton_input1.setText("Pilih");
+        jButton_input1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_input1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jTextField_CariNama1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_Cari1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton_input1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField_CariNama1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Cari1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton_input1)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Data Harga Material dan Pekerja", jPanel2);
+
         javax.swing.GroupLayout jPanel_PencarianLayout = new javax.swing.GroupLayout(jPanel_Pencarian);
         jPanel_Pencarian.setLayout(jPanel_PencarianLayout);
         jPanel_PencarianLayout.setHorizontalGroup(
             jPanel_PencarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_PencarianLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel_PencarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_PencarianLayout.createSequentialGroup()
-                        .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_Cari)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_PencarianLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton_input, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         jPanel_PencarianLayout.setVerticalGroup(
             jPanel_PencarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_PencarianLayout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addGroup(jPanel_PencarianLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Cari))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_input)
+            .addGroup(jPanel_PencarianLayout.createSequentialGroup()
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
 
@@ -235,17 +351,17 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel_Pencarian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel_hasil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel_hasil, javax.swing.GroupLayout.DEFAULT_SIZE, 840, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel_hasil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel_Pencarian, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel_hasil, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                    .addComponent(jPanel_Pencarian, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -263,7 +379,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             
             showalldata show = null;
             try {
-                show = new showalldata();
+                show = new showalldata(1);
             } catch (IOException ex) {
                 Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -276,13 +392,13 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 }
             }
             JOptionPane.showMessageDialog(null, "MASUKAN KATA KUNCI PENCARIAN TERLEBIH DAHULU", " ", JOptionPane.WARNING_MESSAGE);
-        } else {
+        }else{
             //mencari nama dr kotak Cari_Nama
             String nama = jTextField_CariNama.getText();
             Name_Searcher a = null;
 
             try {
-                a = new Name_Searcher();
+                a = new Name_Searcher(1);
             } catch (IOException ex) {
                 Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -440,6 +556,100 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "MASUKAN DATA TERLEBIH DAHULU", "", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jButton_hitungActionPerformed
+ 
+    private void jButton_Cari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cari1ActionPerformed
+        if (jTextField_CariNama1.getText().equals("")) {
+            
+            //menghapus data di tabel hasil pencarian kalau ada isinya
+            if (model3.getRowCount() > 0) {
+                while (model3.getRowCount() > 0) {
+                    model3.removeRow(0);
+                }
+            }
+            
+            showalldata show = null;
+            try {
+                show = new showalldata(2);
+            } catch (IOException ex) {
+                Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
+            for (int row = 0; row < data1.length; row++) {
+                if (data1[row][0] != null) {
+                    model3.addRow(data1[row]);
+                    row++;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "MASUKAN KATA KUNCI PENCARIAN TERLEBIH DAHULU", " ", JOptionPane.WARNING_MESSAGE);
+        }else{
+            //mencari nama dr kotak Cari_Nama
+            String nama = jTextField_CariNama1.getText();
+            Name_Searcher a = null;
+
+            try {
+                a = new Name_Searcher(2);
+            } catch (IOException ex) {
+                Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            //ditampung di string ini
+            String s[][] = a.Search_by_name(a.getmySheet(), a.getmyWorkBook(), nama);
+
+            //menghapus data di tabel hasil pencarian kalau ada isinya
+            if (model3.getRowCount() > 0) {
+                while (model3.getRowCount() > 0) {
+                    model3.removeRow(0);
+                }
+            }
+
+            //mencoba menampilkan hasil pencarian
+            if (s[0][0] == null) {
+                JOptionPane.showMessageDialog(null, "TIDAK MENEMUKAN DATA YANG COCOK", " ", JOptionPane.WARNING_MESSAGE);
+            } else {
+                //tampilkan nama yang sesuai di tabel
+                for (int row = 0; row < s.length; row++) {
+                    if (s[row][0] != null) {
+                        model3.addRow(s[row]);
+                        row++;
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton_Cari1ActionPerformed
+
+    private void jButton_input1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_input1ActionPerformed
+        //INGAT!!! HASIL BERUBAH MENJADI VARIABLE VECTOR, (VECTOR = MIRIP DENGAN ARRAYLIST[])
+        if (Tabel_HasilCari1.getSelectedRow() != -1) {
+            if (model2.getRowCount() != 0 && model2.getValueAt(model2.getRowCount() - 1, 3) == "Total: ") {
+                model2.removeRow(model2.getRowCount() - 1);
+            }
+            
+            Vector pilihan = (Vector) model3.getDataVector().elementAt(Tabel_HasilCari1.getSelectedRow());
+            model2.addRow(pilihan);
+
+            //convert dari vector ke string ke int
+            //untunk perhitungan
+            String cleanedStringValue2 = String.valueOf(pilihan.get(3)).replace(".", "");
+            Object intValue1 = String.format(Locale.US, "%,d", 1 * Long.parseLong(cleanedStringValue2)).replace(',', '.');
+            model2.setValueAt(intValue1, model2.getRowCount() - 1, model2.getColumnCount() - 1);
+            
+            //memanggil button hitung
+            jButton_hitungActionPerformed(evt);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "SILAHKAN PILIH MATERIAL YANG AKAN DIMASUKAN", " ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton_input1ActionPerformed
+
+    private void jTextField_CariNamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CariNamaKeyPressed
+        /*//make a artificial button to creating actionevent
+        Button buttone = new Button();
+        //creating an actionevent
+        ActionEvent e = new ActionEvent((Object) buttone, ActionEvent.ACTION_PERFORMED,"");
+        //calling hitung fx
+        jButton_CariActionPerformed(e);*/
+    }//GEN-LAST:event_jTextField_CariNamaKeyPressed
     
     /**
      * @param args the command line arguments
@@ -482,16 +692,24 @@ public class Name_SearcherUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabel_HasilCari;
+    private javax.swing.JTable Tabel_HasilCari1;
     private javax.swing.JButton jButton_Cari;
+    private javax.swing.JButton jButton_Cari1;
     private javax.swing.JButton jButton_HapusPilihan;
     private javax.swing.JButton jButton_hitung;
     private javax.swing.JButton jButton_input;
+    private javax.swing.JButton jButton_input1;
     private javax.swing.JButton jButton_simpankeexcel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_Pencarian;
     private javax.swing.JPanel jPanel_hasil;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable_materialpilihan;
     private javax.swing.JTextField jTextField_CariNama;
+    private javax.swing.JTextField jTextField_CariNama1;
     // End of variables declaration//GEN-END:variables
 }

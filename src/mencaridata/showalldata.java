@@ -13,8 +13,13 @@ public class showalldata {
     private XSSFWorkbook myWorkBook;
     private XSSFSheet mySheet;
 
-    public showalldata() throws FileNotFoundException, IOException {
-        File myFile = findFile("C:\\", "Daftar_Harga_PO.xlsx");
+    public showalldata(int tab) throws FileNotFoundException, IOException {
+        File myFile = null;
+        if(tab == 1){
+            myFile = findFile("C:\\", "Daftar_Harga_PO.xlsx");
+        }else if(tab == 2){
+            myFile = findFile("C:\\", "Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
+        }
 
         FileInputStream fis = new FileInputStream(myFile);
 

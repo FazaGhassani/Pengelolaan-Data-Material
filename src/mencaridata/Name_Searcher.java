@@ -13,8 +13,15 @@ public final class Name_Searcher {
     private XSSFWorkbook myWorkBook;
     private XSSFSheet mySheet;
 
-    public Name_Searcher() throws FileNotFoundException, IOException {
-        File myFile = findFile("C:\\", "Daftar_Harga_PO.xlsx");
+    public Name_Searcher(int i) throws FileNotFoundException, IOException {
+        
+        File myFile = null;
+        if(i == 1){
+            myFile = findFile("C:\\", "Daftar_Harga_PO.xlsx");
+        }
+        else if (i == 2){
+            myFile = findFile("C:\\", "Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
+        }
 
         FileInputStream fis = new FileInputStream(myFile);
 
@@ -51,7 +58,7 @@ public final class Name_Searcher {
         String[][] datal = new String[101][5];
         int rowdatal = 0;
 
-        for (int rowIndex = 0; rowIndex <= mySheet.getLastRowNum(); rowIndex++) {
+        for (int rowIndex = 1; rowIndex <= mySheet.getLastRowNum(); rowIndex++) {
             //putting current row
             XSSFRow row = mySheet.getRow(rowIndex);
             //search every cell
