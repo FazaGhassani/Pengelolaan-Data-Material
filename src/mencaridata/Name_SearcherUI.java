@@ -254,6 +254,12 @@ public class Name_SearcherUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Data Harga PO", jPanel1);
 
+        jTextField_CariNama1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_CariNama1KeyPressed(evt);
+            }
+        });
+
         jButton_Cari1.setText("Cari");
         jButton_Cari1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -643,13 +649,26 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_input1ActionPerformed
 
     private void jTextField_CariNamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CariNamaKeyPressed
-        /*//make a artificial button to creating actionevent
-        Button buttone = new Button();
-        //creating an actionevent
-        ActionEvent e = new ActionEvent((Object) buttone, ActionEvent.ACTION_PERFORMED,"");
-        //calling hitung fx
-        jButton_CariActionPerformed(e);*/
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            //make a artificial button to creating actionevent
+            Button buttone = new Button();
+            //creating an actionevent
+            ActionEvent e = new ActionEvent((Object) buttone, ActionEvent.ACTION_PERFORMED,"");
+            //calling hitung fx
+            jButton_CariActionPerformed(e);            
+        }
     }//GEN-LAST:event_jTextField_CariNamaKeyPressed
+
+    private void jTextField_CariNama1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CariNama1KeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            //make a artificial button to creating actionevent
+            Button buttone = new Button();
+            //creating an actionevent
+            ActionEvent e = new ActionEvent((Object) buttone, ActionEvent.ACTION_PERFORMED,"");
+            //calling hitung fx
+            jButton_Cari1ActionPerformed(e);            
+        }
+    }//GEN-LAST:event_jTextField_CariNama1KeyPressed
     
     /**
      * @param args the command line arguments

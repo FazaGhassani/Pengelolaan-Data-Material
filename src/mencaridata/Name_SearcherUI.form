@@ -394,6 +394,9 @@
               </Layout>
               <SubComponents>
                 <Component class="javax.swing.JTextField" name="jTextField_CariNama1">
+                  <Events>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField_CariNama1KeyPressed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton_Cari1">
                   <Properties>
