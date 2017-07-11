@@ -41,21 +41,23 @@ public class write2class {
         //loop colomnya
         //masukin ke excel tiap cell
         String FILE_NAME = str + name + ".xlsx";
-        System.out.println(str);
-        System.out.println(FILE_NAME);
         int rnmb = 0; //for loop row
+        //numbering
+        int numbering = 1;
         
         // making 1 row for showing table content
         Row row = this.mySheet.createRow(rnmb++);
         Cell cells = row.createCell(0);
-        cells.setCellValue((String) "Uraian Pekerjaan");
+        cells.setCellValue((String) "No");
         cells = row.createCell(1);
-        cells.setCellValue((String) "Volume");
+        cells.setCellValue((String) "Uraian Pekerjaan");
         cells = row.createCell(2);
-        cells.setCellValue((String) "Unit/Satuan");
+        cells.setCellValue((String) "Volume");
         cells = row.createCell(3);
-        cells.setCellValue((String) "Harga Satuan");
+        cells.setCellValue((String) "Unit/Satuan");
         cells = row.createCell(4);
+        cells.setCellValue((String) "Harga Satuan");
+        cells = row.createCell(5);
         cells.setCellValue((String) "Sub-total");
            
         for (Object i : v) {
@@ -64,6 +66,12 @@ public class write2class {
             row = this.mySheet.createRow(rnmb++); //creating new row
             
             int cnmb = 0;
+            Cell celnumber = row.createCell(cnmb++); //creating new cell for 
+                                                     //numbering in first column
+            if(i != v.lastElement()){
+                celnumber.setCellValue((Integer) numbering++);
+            }
+            
             for (Object ii : vecrow) {
                 Cell cell = row.createCell(cnmb++); //creating new cell in the row
                 if (ii instanceof String) {
