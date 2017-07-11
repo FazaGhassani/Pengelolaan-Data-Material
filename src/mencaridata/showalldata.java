@@ -14,11 +14,12 @@ public class showalldata {
     private XSSFSheet mySheet;
 
     public showalldata(int tab) throws FileNotFoundException, IOException {
+        mencarifile m = new mencarifile();
         File myFile = null;
         if(tab == 1){
-            myFile = findFile("C:\\", "Daftar_Harga_PO.xlsx");
+            myFile = m.findFile("C:\\", "Daftar_Harga_PO.xlsx");
         }else if(tab == 2){
-            myFile = findFile("C:\\", "Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
+            myFile = m.findFile("C:\\", "Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
         }
 
         FileInputStream fis = new FileInputStream(myFile);
@@ -29,24 +30,6 @@ public class showalldata {
         // Return first sheet from the XLSX workbook
         setmySheet(0);
 
-    }
-
-    private static File findFile(final String rootFilePath, final String fileToBeFound) {
-
-        File rootFile = new File(rootFilePath);
-        File[] subFiles = rootFile.listFiles();
-        for (File file : subFiles != null ? subFiles : new File[]{}) {
-            if (file.getAbsolutePath().endsWith(fileToBeFound)) {
-                return file;
-            } else if (file.isDirectory()) {
-                File f = findFile(file.getAbsolutePath(), fileToBeFound);
-                if (f != null) {
-                    return f;
-                }
-            }
-        }
-        return null; // null returned in case your file is not found
-        //source code : https://stackoverflow.com/questions/25422244/java-automatically-detecting-input-file-path
     }
 
     public String[][] show(XSSFSheet mySheet, XSSFWorkbook myWorkBook) {
