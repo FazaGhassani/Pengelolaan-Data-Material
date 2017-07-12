@@ -15,13 +15,13 @@ public final class Name_Searcher {
 
     public Name_Searcher(int i) throws FileNotFoundException, IOException {
         
-        File myFile = null;
+        String myFile = null;
         mencarifile m = new mencarifile();
         if(i == 1){
-            myFile = m.findFile("C:\\", "Daftar_Harga_PO.xlsx");
+            myFile = "C:\\Daftar_Harga_PO.xlsx";
         }
         else if (i == 2){
-            myFile = m.findFile("C:\\", "Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
+            myFile = "C:\\Daftar_Harga_Bangunan_dan_Pekerja.xlsx";
         }
 
         FileInputStream fis = new FileInputStream(myFile);

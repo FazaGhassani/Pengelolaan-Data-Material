@@ -36,6 +36,11 @@ public class MenuUserUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menu Utama", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jButton_EditProfile.setText("Ubah Profil");
+        jButton_EditProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EditProfileActionPerformed(evt);
+            }
+        });
 
         jButton_KeloladataMaster.setText("Kelola Data Master");
 
@@ -135,6 +140,12 @@ public class MenuUserUI extends javax.swing.JFrame {
         ui.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton_KelolaRABActionPerformed
+
+    private void jButton_EditProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EditProfileActionPerformed
+        EditUserUI ui = new EditUserUI(this.Nama,this.Username,this.Pass);
+        ui.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton_EditProfileActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

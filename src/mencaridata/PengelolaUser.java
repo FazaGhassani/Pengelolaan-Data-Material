@@ -69,7 +69,6 @@ public class PengelolaUser {
         //pilihan 0 : nama //pilihan 1: username //pilihan 2: password
         //getvar untuk memutuskan apa akan mengambil data atau tidak
         //loop tiap row
-        boolean hasil = false;
         for (int rowIndex = 1; rowIndex <= mySheet.getLastRowNum(); rowIndex++) {
             XSSFRow row1 = mySheet.getRow(rowIndex);
             if (row1 != null) {
@@ -79,16 +78,14 @@ public class PengelolaUser {
                         if(getvar.equals("yes")){
                             this.nama = row1.getCell(0).getStringCellValue();
                             this.usrnm = row1.getCell(1).getStringCellValue();
-                            this.pass = row1.getCell(2).getStringCellValue();
+                            this.pass =  row1.getCell(2).getStringCellValue();
                         }
-                        hasil = true;
-                    }else{
-                        hasil = false;
+                        return true;
                     }
                 }
             }
         }
-        return hasil;
+        return false;
     }
     
     public boolean Login(String username, String pass){
@@ -96,6 +93,24 @@ public class PengelolaUser {
             return true;
         }else{
             return false;
+        }
+    }
+    
+    public void ganti(String namal, String namab, String userl, String userb, String passl, String passb) {
+        for (int rowIndex = 1; rowIndex <= mySheet.getLastRowNum(); rowIndex++) {
+            XSSFRow row1 = mySheet.getRow(rowIndex);
+            if (row1 != null) {
+                XSSFCell cell = row1.getCell(1);
+                if (cell != null) {
+                    if(cell.getStringCellValue().equals(namal)){
+                        row1.getCell(0).setCellValue((String) namab);
+                        row1.getCell(1).setCellValue((String) userb);
+                        row1.getCell(2).setCellValue((String) passb);
+                        this.nama = namab; this.pass=passb; this.usrnm = userb;
+                        saveFile();
+                    }
+                }
+            }
         }
     }
     

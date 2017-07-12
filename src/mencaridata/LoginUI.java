@@ -126,8 +126,7 @@ public class LoginUI extends javax.swing.JFrame {
 
     private void jButton_ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ConfirmActionPerformed
         PengelolaUser a=null;
-        
-        JOptionPane.showMessageDialog(null, "memuat...", "", JOptionPane.INFORMATION_MESSAGE);
+
         try {
             a = new PengelolaUser();
         } catch (IOException ex) {
