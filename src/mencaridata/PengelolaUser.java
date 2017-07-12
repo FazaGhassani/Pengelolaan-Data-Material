@@ -17,13 +17,15 @@ public class PengelolaUser {
     private String pass = null;
     private XSSFWorkbook myWorkBook;
     private XSSFSheet mySheet;
-    private final File myFile;
+    //private final File myFile;
+    String myFile;
     
     public PengelolaUser() throws FileNotFoundException, IOException{
         
         //mengambil data usrnm
         mencarifile m = new mencarifile();
-        myFile = m.findFile("C:\\", "srnmnama.xlsx");
+        myFile = "C:\\srnmnama.xlsx";
+        //myFile = m.findFile("C:\\", "srnmnama.xlsx");
         FileInputStream fis = new FileInputStream(myFile);
         
         // Finds the workbook instance for XLSX file
