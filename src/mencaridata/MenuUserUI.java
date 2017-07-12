@@ -128,7 +128,7 @@ public class MenuUserUI extends javax.swing.JFrame {
     private void jButton_KelolaRABActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_KelolaRABActionPerformed
         Name_SearcherUI ui = null;
         try {
-            ui = new Name_SearcherUI();
+            ui = new Name_SearcherUI(this.Nama,this.Username,this.Pass);
         } catch (IOException ex) {
             Logger.getLogger(MenuUserUI.class.getName()).log(Level.SEVERE, null, ex);
         }

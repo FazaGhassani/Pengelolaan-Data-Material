@@ -31,12 +31,18 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     DefaultTableModel model1;
     DefaultTableModel model2;
     DefaultTableModel model3;
+    private String Username;
+    private String Pass;
+    private String Nama;
 
-    public Name_SearcherUI() throws IOException {
+    public Name_SearcherUI(String nama, String username, String pass) throws IOException {
         initComponents();
         model1 = (DefaultTableModel) Tabel_HasilCari.getModel();
         model2 = (DefaultTableModel) jTable_materialpilihan.getModel();
         model3 = (DefaultTableModel) Tabel_HasilCari1.getModel();
+        this.Username = username;
+        this.Pass =pass;
+        this.Nama = nama;
 
         //menampilkan semua data di tab 1
         showalldata show = new showalldata(1);
@@ -680,45 +686,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             jButton_Cari1ActionPerformed(e);            
         }
     }//GEN-LAST:event_jTextField_CariNama1KeyPressed
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Name_SearcherUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Name_SearcherUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Name_SearcherUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Name_SearcherUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new Name_SearcherUI().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabel_HasilCari;
