@@ -90,7 +90,10 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         jButton_input1 = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem_Profil = new javax.swing.JMenuItem();
+        jMenuItem_Keluar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem_eDataMaster = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -359,9 +362,30 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         );
 
         jMenu3.setText("File");
+
+        jMenuItem_Profil.setText("Profil");
+        jMenuItem_Profil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ProfilActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem_Profil);
+
+        jMenuItem_Keluar.setText("Keluar");
+        jMenuItem_Keluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_KeluarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem_Keluar);
+
         jMenuBar2.add(jMenu3);
 
-        jMenu4.setText("Edit");
+        jMenu4.setText("Edit...");
+
+        jMenuItem_eDataMaster.setText("Edit Data Master");
+        jMenu4.add(jMenuItem_eDataMaster);
+
         jMenuBar2.add(jMenu4);
 
         setJMenuBar(jMenuBar2);
@@ -687,6 +711,23 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField_CariNama1KeyPressed
 
+    private void jMenuItem_ProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ProfilActionPerformed
+        MenuUserUI ui = new MenuUserUI(this.Nama,this.Username,this.Pass);
+        ui.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem_ProfilActionPerformed
+
+    private void jMenuItem_KeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_KeluarActionPerformed
+        int result = JOptionPane.showConfirmDialog(null,
+            "Anda yakin akan keluar?","Konfirmasi keluar", 
+            JOptionPane.YES_NO_CANCEL_OPTION);
+        if (result == JOptionPane.YES_OPTION){
+            HalamanUtamaUI a = new HalamanUtamaUI();
+            a.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jMenuItem_KeluarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabel_HasilCari;
@@ -701,6 +742,9 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem_Keluar;
+    private javax.swing.JMenuItem jMenuItem_Profil;
+    private javax.swing.JMenuItem jMenuItem_eDataMaster;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_Pencarian;
