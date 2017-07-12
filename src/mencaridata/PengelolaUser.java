@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class PengelolaUser {
+    
     private String nama = null;
     private String usrnm = null;
     private String pass = null;
@@ -22,7 +23,7 @@ public class PengelolaUser {
         
         //mengambil data usrnm
         mencarifile m = new mencarifile();
-        myFile = m.findFile("C:\\", "USERNAME.xlsx");
+        myFile = m.findFile("C:\\", "srnmnama.xlsx");
         FileInputStream fis = new FileInputStream(myFile);
         
         // Finds the workbook instance for XLSX file
@@ -33,14 +34,13 @@ public class PengelolaUser {
     }
     
     public boolean Daftar(String nama, String Username, String Pass){
-        Row row = this.mySheet.createRow(this.mySheet.getLastRowNum()+1);
-        row.createCell(0).setCellValue(nama);
-        row.createCell(1).setCellValue(Username);
-        row.createCell(2).setCellValue(Pass);
-        System.out.println(this.cariNAMA(Username, 1));
         
         //kalau namanya tidak ketemu, maka masukan ke daftar baru
-        if(this.cariNAMA(Username, 1) == false){
+        if(this.cariNAMA(Username, 1 ,"no") == false){
+            Row row = this.mySheet.createRow(this.mySheet.getLastRowNum()+1);
+            row.createCell(0).setCellValue(nama);
+            row.createCell(1).setCellValue(Username);
+            row.createCell(2).setCellValue(Pass);
             boolean save = saveFile();
             return save; 
         }else{
@@ -63,16 +63,22 @@ public class PengelolaUser {
         }
     }
     
-    public boolean cariNAMA(String nama, int pilihan){
+    public boolean cariNAMA(String nama, int pilihan, String getvar){
         //pilihan 0 : nama //pilihan 1: username //pilihan 2: password
+        //getvar untuk memutuskan apa akan mengambil data atau tidak
         //loop tiap row
         boolean hasil = false;
         for (int rowIndex = 1; rowIndex <= mySheet.getLastRowNum(); rowIndex++) {
-            XSSFRow row = mySheet.getRow(rowIndex);
-            if (row != null) {
-                XSSFCell cell = row.getCell(pilihan);
+            XSSFRow row1 = mySheet.getRow(rowIndex);
+            if (row1 != null) {
+                XSSFCell cell = row1.getCell(pilihan);
                 if (cell != null) {
                     if(cell.getStringCellValue().equals(nama)){
+                        if(getvar.equals("yes")){
+                            this.nama = row1.getCell(0).getStringCellValue();
+                            this.usrnm = row1.getCell(1).getStringCellValue();
+                            this.pass = row1.getCell(2).getStringCellValue();
+                        }
                         hasil = true;
                     }else{
                         hasil = false;
@@ -84,13 +90,12 @@ public class PengelolaUser {
     }
     
     public boolean Login(String username, String pass){
-        if(cariNAMA(username,1) == true && cariNAMA(pass,2)==true){
+        if(cariNAMA(username,1, "yes") == true && cariNAMA(pass,2,"no")==true){
             return true;
         }else{
             return false;
         }
     }
-    
     
     public String getNama() {
         return nama;
