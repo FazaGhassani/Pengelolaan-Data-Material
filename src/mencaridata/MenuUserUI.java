@@ -43,6 +43,11 @@ public class MenuUserUI extends javax.swing.JFrame {
         });
 
         jButton_KeloladataMaster.setText("Kelola Data Master");
+        jButton_KeloladataMaster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_KeloladataMasterActionPerformed(evt);
+            }
+        });
 
         jButton_KelolaRAB.setText("Kelola RAB");
         jButton_KelolaRAB.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +151,12 @@ public class MenuUserUI extends javax.swing.JFrame {
         ui.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton_EditProfileActionPerformed
+
+    private void jButton_KeloladataMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_KeloladataMasterActionPerformed
+        EditDataMasterMenuUI ui = new EditDataMasterMenuUI(this.Nama, this.Username, this.Pass);
+        ui.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton_KeloladataMasterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
