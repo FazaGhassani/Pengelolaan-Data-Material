@@ -15,6 +15,7 @@ public class PengelolaData {
     private XSSFWorkbook myWorkBook;
     private XSSFSheet mySheet;
     private String myFile;
+    private int numberfind = 0; //buat nyimpen index
     
     public PengelolaData(int i) throws FileNotFoundException, IOException {
         
@@ -36,15 +37,46 @@ public class PengelolaData {
 
     }
     
-    public void tambahdata(String material, int volume, String unit, int harga){
+    public void tambahdata(String material, String unit, int harga){
+        XSSFRow lastrow = mySheet.getRow(mySheet.getLastRowNum());
         XSSFRow row = mySheet.createRow(mySheet.getLastRowNum()+1);
-        row.createCell(0).setCellValue("");
+        int number = (int)lastrow.getCell(0).getNumericCellValue();
+        row.createCell(0).setCellValue(number+1);
         row.createCell(1).setCellValue(material);
-        row.createCell(2).setCellValue(volume);
+        row.createCell(2).setCellValue(1);
         row.createCell(3).setCellValue(unit);
         row.createCell(4).setCellValue(harga);
         
         saveFile();
+    }
+    
+    //search yang akan mencari ke semua cell
+    public boolean cariData(String material, int volume, String unit, int harga){
+        for (int rowIndex = 1; rowIndex <= mySheet.getLastRowNum(); rowIndex++) {
+            XSSFRow row1 = mySheet.getRow(rowIndex);
+            if (row1 != null) {
+                if(row1.getCell(1).getStringCellValue().equals(material)
+                        &&row1.getCell(2).getNumericCellValue()==volume
+                        &&row1.getCell(3).getStringCellValue().equals(unit)
+                        &&row1.getCell(4).getNumericCellValue()==harga){
+                    numberfind = rowIndex;
+                    return true;}
+            }
+        }
+        return false;
+    }
+    
+    public void ubahData(String material, int volume, String unit, int harga,
+            String materialb, int volumeb, String unitb, int hargab){
+        if(cariData(material,volume,unit,harga)){
+            //ubah data pada row ke rowIndex
+            XSSFRow row = mySheet.getRow(numberfind);
+            row.getCell(1).setCellValue(materialb);
+            row.getCell(2).setCellValue(volume);
+            row.getCell(3).setCellValue(unitb);
+            row.getCell(4).setCellValue(hargab);
+            saveFile();
+        }
     }
     
     public void saveFile(){

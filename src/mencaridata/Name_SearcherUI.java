@@ -384,6 +384,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         jMenu4.setText("Edit...");
 
         jMenuItem_eDataMaster.setText("Edit Data Master");
+        jMenuItem_eDataMaster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_eDataMasterActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem_eDataMaster);
 
         jMenuBar2.add(jMenu4);
@@ -727,6 +732,12 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_jMenuItem_KeluarActionPerformed
+
+    private void jMenuItem_eDataMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_eDataMasterActionPerformed
+        EditDataMasterMenuUI ui = new EditDataMasterMenuUI(this.Nama, this.Username, this.Pass);
+        ui.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem_eDataMasterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
