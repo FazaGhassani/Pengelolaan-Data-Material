@@ -5,6 +5,11 @@
  */
 package mencaridata;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lenovo
@@ -66,6 +71,11 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
         jLabel6.setText("/Jenis Material :");
 
         jButton_tambahkan.setText("Tambah");
+        jButton_tambahkan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_tambahkanActionPerformed(evt);
+            }
+        });
 
         jButton_Kembali.setText("Kembali");
         jButton_Kembali.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +170,28 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
         ui.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton_KembaliActionPerformed
+
+    private void jButton_tambahkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_tambahkanActionPerformed
+        PengelolaData a =null;
+
+        if (jTextField_jnspekerjaan.getText().equals("")|| jTextField_Volume.getText().equals("")
+                || jTextField_unit.getText().equals("") || jTextField_hargasatuan.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "TIDAK BOLEH ADA DATA KOSONG", "", JOptionPane.WARNING_MESSAGE);
+        }else{   
+            try {
+                a = new PengelolaData(jComboBox_pilihandata.getSelectedIndex());
+            } catch (IOException ex) {
+                Logger.getLogger(EditDataMasterTambahUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            a.tambahdata(jTextField_jnspekerjaan.getText(), Integer.parseInt(jTextField_Volume.getText()),
+                    jTextField_unit.getText(), Integer.parseInt(jTextField_hargasatuan.getText()));
+            JOptionPane.showMessageDialog(null, "Data Berhasil Dimasukan", "", JOptionPane.INFORMATION_MESSAGE);
+            EditDataMasterMenuUI ui= new EditDataMasterMenuUI(this.Nama,this.Username,this.Pass);
+            ui.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_jButton_tambahkanActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

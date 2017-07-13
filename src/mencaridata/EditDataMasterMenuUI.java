@@ -43,6 +43,11 @@ public class EditDataMasterMenuUI extends javax.swing.JFrame {
         jButton_EditData.setText("Edit/Delete Data");
 
         jButton_TambahData.setText("Tambah Data");
+        jButton_TambahData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_TambahDataActionPerformed(evt);
+            }
+        });
 
         jButton_Kembali.setText("Kembali");
         jButton_Kembali.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +105,12 @@ public class EditDataMasterMenuUI extends javax.swing.JFrame {
         ui.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton_KembaliActionPerformed
+
+    private void jButton_TambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_TambahDataActionPerformed
+        EditDataMasterTambahUI ui = new EditDataMasterTambahUI(this.Nama,this.Username,this.Pass);
+        ui.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton_TambahDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
