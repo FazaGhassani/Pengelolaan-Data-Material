@@ -229,6 +229,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 Tabel_HasilCariMouseClicked(evt);
             }
         });
+        Tabel_HasilCari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabel_HasilCariMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tabel_HasilCari);
 
         jButton_input.setText("Pilih");
@@ -396,6 +401,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         jMenu4.setText("Edit...");
 
         jMenuItem_eDataMaster.setText("Edit Data Master");
+        jMenuItem_eDataMaster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_eDataMasterActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem_eDataMaster);
 
         jMenuBar2.add(jMenu4);
@@ -542,16 +552,16 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 path = chooser.getSelectedFile().getAbsolutePath();
                 //chooser.getSelectedFile(); //to get selected file
                 //getCurrentDirectory() // to get current dir
+                try {
+                    a.write2excel(vable1, path, name);
+                    JOptionPane.showMessageDialog(null, "DATA BERHASIL DIMASUKAN", "", JOptionPane.INFORMATION_MESSAGE);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
-                System.out.println("");
+                JOptionPane.showMessageDialog(null, "DATA TIDAK JADI DIMASUKAN", "", JOptionPane.INFORMATION_MESSAGE);
             }
-
-            try {
-                a.write2excel(vable1, path, name);
-                JOptionPane.showMessageDialog(null, "DATA BERHASIL DIMASUKAN", "", JOptionPane.INFORMATION_MESSAGE);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         } else {
             JOptionPane.showMessageDialog(null, "MASUKAN DATA TERLEBIH DAHULU", "", JOptionPane.WARNING_MESSAGE);
         }
@@ -740,17 +750,23 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem_KeluarActionPerformed
 
+    private void jMenuItem_eDataMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_eDataMasterActionPerformed
+        EditDataMasterMenuUI ui = new EditDataMasterMenuUI(this.Nama, this.Username, this.Pass);
+        ui.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem_eDataMasterActionPerformed
 
+    private void Tabel_HasilCariMouseClicked(java.awt.event.MouseEvent evt) {                                             
+
+    }                                            
+
+/*
     private void Tabel_HasilCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCariMouseClicked
         // TODO add your handling code here:
-            if (evt.getClickCount() == 2 ){
-                Button buttone = new Button();
-                //creating an actionevent
-                ActionEvent e = new ActionEvent((Object) buttone, ActionEvent.ACTION_PERFORMED,"");
-                //calling hitung fx
-                jButton_inputActionPerformed(e);    
+          
     }//GEN-LAST:event_Tabel_HasilCariMouseClicked
     }
+*/
     private void Tabel_HasilCari1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCari1MouseClicked
         // TODO add your handling code here:
           if (evt.getClickCount() == 2 ){

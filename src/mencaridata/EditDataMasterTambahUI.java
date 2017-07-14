@@ -40,11 +40,11 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextField_jnspekerjaan = new javax.swing.JTextField();
-        jTextField_Volume = new javax.swing.JTextField();
         jTextField_unit = new javax.swing.JTextField();
         jTextField_hargasatuan = new javax.swing.JTextField();
         jButton_tambahkan = new javax.swing.JButton();
         jButton_Kembali = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +84,9 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel7.setText("1.0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -103,9 +106,9 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBox_pilihandata, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField_jnspekerjaan)
-                            .addComponent(jTextField_Volume)
                             .addComponent(jTextField_unit)
-                            .addComponent(jTextField_hargasatuan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField_hargasatuan, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +132,7 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField_Volume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -142,7 +145,7 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
                 .addComponent(jButton_tambahkan, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_Kembali, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,7 +177,7 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
     private void jButton_tambahkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_tambahkanActionPerformed
         PengelolaData a =null;
 
-        if (jTextField_jnspekerjaan.getText().equals("")|| jTextField_Volume.getText().equals("")
+        if (jTextField_jnspekerjaan.getText().equals("")
                 || jTextField_unit.getText().equals("") || jTextField_hargasatuan.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "TIDAK BOLEH ADA DATA KOSONG", "", JOptionPane.WARNING_MESSAGE);
         }else{   
@@ -184,7 +187,7 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
                 Logger.getLogger(EditDataMasterTambahUI.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            a.tambahdata(jTextField_jnspekerjaan.getText(), Integer.parseInt(jTextField_Volume.getText()),
+            a.tambahdata(jTextField_jnspekerjaan.getText(),
                     jTextField_unit.getText(), Integer.parseInt(jTextField_hargasatuan.getText()));
             JOptionPane.showMessageDialog(null, "Data Berhasil Dimasukan", "", JOptionPane.INFORMATION_MESSAGE);
             EditDataMasterMenuUI ui= new EditDataMasterMenuUI(this.Nama,this.Username,this.Pass);
@@ -204,8 +207,8 @@ public class EditDataMasterTambahUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField_Volume;
     private javax.swing.JTextField jTextField_hargasatuan;
     private javax.swing.JTextField jTextField_jnspekerjaan;
     private javax.swing.JTextField jTextField_unit;
