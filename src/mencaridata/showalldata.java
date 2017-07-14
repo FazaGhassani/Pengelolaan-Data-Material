@@ -12,14 +12,27 @@ public class showalldata {
 
     private XSSFWorkbook myWorkBook;
     private XSSFSheet mySheet;
-
+    String myFile;
+    
     public showalldata(int tab) throws FileNotFoundException, IOException {
         mencarifile m = new mencarifile();
-        File myFile = null;
+        //File myFile = null;
+        
+        
+        
+        // Finds the workbook instance for XLSX file
+        //setmyWorkBook(fis);
+        
+        // Return first sheet from the XLSX workbook
+        //setmySheet(0);
+        
         if(tab == 1){
-            myFile = m.findFile("C:\\", "Daftar_Harga_PO.xlsx");
+            //myFile = m.findFile("C:\\", "Daftar_Harga_PO.xlsx");
+            myFile = "C:\\db_java\\Daftar_Harga_PO.xlsx";
+            
         }else if(tab == 2){
-            myFile = m.findFile("C:\\", "Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
+            //myFile = m.findFile("C:\\", "Daftar_Harga_Bangunan_dan_Pekerja.xlsx");
+            myFile = "C:\\db_java\\Daftar_Harga_Bangunan_dan_Pekerja.xlsx";
         }
 
         FileInputStream fis = new FileInputStream(myFile);

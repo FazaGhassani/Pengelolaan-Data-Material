@@ -18,10 +18,10 @@ public final class Name_Searcher {
         String myFile = null;
         mencarifile m = new mencarifile();
         if(i == 1){
-            myFile = "C:\\Daftar_Harga_PO.xlsx";
+            myFile = "C:\\db_java\\Daftar_Harga_PO.xlsx";
         }
         else if (i == 2){
-            myFile = "C:\\Daftar_Harga_Bangunan_dan_Pekerja.xlsx";
+            myFile = "C:\\db_java\\Daftar_Harga_Bangunan_dan_Pekerja.xlsx";
         }
 
         FileInputStream fis = new FileInputStream(myFile);
