@@ -19,34 +19,17 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
     private String material; private int volume; private String unit; private int harga;
     private int pili = 0;
     
-    public EditDataMasterDeleteEditUI() throws IOException {
+    public EditDataMasterDeleteEditUI(String nama, String username, String pass) throws IOException {
         //String nama, String username, String pass
         initComponents();
         model1 = (DefaultTableModel) Tabel_HasilCari.getModel();
-        //model2 = (DefaultTableModel) jTable_materialpilihan.getModel();
         model3 = (DefaultTableModel) Tabel_HasilCari1.getModel();
-        //this.Username = username;
-        //this.Pass =pass;
-        //this.Nama = nama;
+        this.Username = username;
+        this.Pass =pass;
+        this.Nama = nama;
         
-        //menampilkan semua data di tab 1
-        showalldata show = new showalldata(1);
-        String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
-        for (int row = 0; row < data1.length; row++) {
-            if (data1[row][0] != null) {
-                model1.addRow(data1[row]);
-                row++;
-            }
-        }
-        //menampilkan semua data di tab 2
-        showalldata show1 = new showalldata(2);
-        String[][] data2 = show1.show(show1.getmySheet(), show1.getmyWorkBook());
-        for (int row = 0; row < data2.length; row++) {
-            if (data1[row][0] != null) {
-                model3.addRow(data2[row]);
-                row++;
-            }
-        }
+        //MENAMPILKAN SEMUA DATA
+        SHOWALLDATA();
     }
     
     @SuppressWarnings("unchecked")
@@ -425,51 +408,34 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
         a.ubahData(this.material, this.volume, this.unit, this.harga, 
                 jTextField_jnspekerjaan.getText(), Integer.parseInt(v), 
                 jTextField_unit.getText(), Integer.parseInt(h));
-
-        //menghapus data di tabel hasil pencarian kalau ada isinya
-        if (model1.getRowCount() > 0 || model3.getRowCount() > 0) {
-            while (model1.getRowCount() > 0) {
-                model1.removeRow(0);
-            }
-            while (model3.getRowCount() > 0) {
-                model3.removeRow(0);
-            }
-        }
         
-        
-        //menampilkan semua data di tab 1
-        showalldata show = null;
-        try {
-            show = new showalldata(1);
-        } catch (IOException ex) {
-            Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
-        for (int row = 0; row < data1.length; row++) {
-            if (data1[row][0] != null) {
-                model1.addRow(data1[row]);
-                row++;
-            }
-        }
-        
-        //menampilkan semua data di tab 2
-        showalldata show1 = null;
-        try {
-            show1 = new showalldata(2);
-        } catch (IOException ex) {
-            Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String[][] data2 = show1.show(show1.getmySheet(), show1.getmyWorkBook());
-        for (int row = 0; row < data2.length; row++) {
-            if (data1[row][0] != null) {
-                model3.addRow(data2[row]);
-                row++;
-            }
-        }
+        SHOWALLDATA();
     }//GEN-LAST:event_jButton_ubahActionPerformed
 
     private void jButton_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_hapusActionPerformed
+        int result = JOptionPane.showConfirmDialog(null,
+                "Anda yakin akan menghapus ?", "",
+                JOptionPane.YES_NO_CANCEL_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            //cek data ada apa nggak
+            PengelolaData a =  null;
             
+            try {
+                a = new PengelolaData(pili);
+            } catch (IOException ex) {
+                Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            boolean putusan = a.cariData(material, volume, unit, harga);
+            if(putusan == true){
+                //hapus datanya
+                a.deleteData();
+                SHOWALLDATA();
+            }else{
+                //kalau datanya nggak ketemu
+                JOptionPane.showMessageDialog(null, "Data tidak ketemu","",JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jButton_hapusActionPerformed
 
     private void jTextField_CariNamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_CariNamaKeyPressed
@@ -666,44 +632,49 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_pilihActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    //menampilkan semua 
+    private void SHOWALLDATA() {
+        
+        //menghapus data di tabel hasil pencarian kalau ada isinya
+        if (model1.getRowCount() > 0 || model3.getRowCount() > 0) {
+            while (model1.getRowCount() > 0) {
+                model1.removeRow(0);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            while (model3.getRowCount() > 0) {
+                model3.removeRow(0);
+            }
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new EditDataMasterDeleteEditUI().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        
+        //menampilkan semua data di tab 1
+        showalldata show = null;
+        try {
+            show = new showalldata(1);
+        } catch (IOException ex) {
+            Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
+        for (int row = 0; row < data1.length; row++) {
+            if (data1[row][0] != null) {
+                model1.addRow(data1[row]);
+                row++;
             }
-        });
+        }
+
+        //menampilkan semua data di tab 2
+        try {
+            show = new showalldata(2);
+        } catch (IOException ex) {
+            Logger.getLogger(EditDataMasterDeleteEditUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String[][] data2 = show.show(show.getmySheet(), show.getmyWorkBook());
+        for (int row = 0; row < data2.length; row++) {
+            if (data1[row][0] != null) {
+                model3.addRow(data2[row]);
+                row++;
+            }
+        }
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabel_HasilCari;

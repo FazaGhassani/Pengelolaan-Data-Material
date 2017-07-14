@@ -79,6 +79,11 @@ public class PengelolaData {
         }
     }
     
+    public void deleteData(){
+        mySheet.removeRow(mySheet.getRow(numberfind));
+        saveFile();
+    }
+    
     public void saveFile(){
         try {
             FileOutputStream outputStream = new FileOutputStream(myFile);

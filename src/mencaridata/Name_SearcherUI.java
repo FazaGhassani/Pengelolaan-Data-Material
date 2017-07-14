@@ -535,16 +535,16 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 path = chooser.getSelectedFile().getAbsolutePath();
                 //chooser.getSelectedFile(); //to get selected file
                 //getCurrentDirectory() // to get current dir
+                try {
+                    a.write2excel(vable1, path, name);
+                    JOptionPane.showMessageDialog(null, "DATA BERHASIL DIMASUKAN", "", JOptionPane.INFORMATION_MESSAGE);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
-                System.out.println("");
+                JOptionPane.showMessageDialog(null, "DATA TIDAK JADI DIMASUKAN", "", JOptionPane.INFORMATION_MESSAGE);
             }
-
-            try {
-                a.write2excel(vable1, path, name);
-                JOptionPane.showMessageDialog(null, "DATA BERHASIL DIMASUKAN", "", JOptionPane.INFORMATION_MESSAGE);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         } else {
             JOptionPane.showMessageDialog(null, "MASUKAN DATA TERLEBIH DAHULU", "", JOptionPane.WARNING_MESSAGE);
         }

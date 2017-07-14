@@ -1,5 +1,9 @@
 package mencaridata;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class EditDataMasterMenuUI extends javax.swing.JFrame {
 
     private String Username;
@@ -27,6 +31,11 @@ public class EditDataMasterMenuUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Edit Data Master", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jButton_EditData.setText("Edit/Delete Data");
+        jButton_EditData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EditDataActionPerformed(evt);
+            }
+        });
 
         jButton_TambahData.setText("Tambah Data");
         jButton_TambahData.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +106,17 @@ public class EditDataMasterMenuUI extends javax.swing.JFrame {
         ui.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton_TambahDataActionPerformed
+
+    private void jButton_EditDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EditDataActionPerformed
+        EditDataMasterDeleteEditUI ui=null;
+        try {
+            ui = new EditDataMasterDeleteEditUI(this.Nama,this.Username,this.Pass);
+        } catch (IOException ex) {
+            Logger.getLogger(EditDataMasterMenuUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ui.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton_EditDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
