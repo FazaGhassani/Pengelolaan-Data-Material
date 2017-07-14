@@ -15,6 +15,7 @@ public class EditDataMasterMenuUI extends javax.swing.JFrame {
         this.Username = username;
         this.Pass =pass;
         this.Nama = nama;
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

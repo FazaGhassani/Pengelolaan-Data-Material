@@ -26,7 +26,7 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
         this.Username = username;
         this.Pass =pass;
         this.Nama = nama;
-        
+        setLocationRelativeTo(null);
         //MENAMPILKAN SEMUA DATA
         SHOWALLDATA();
     }
@@ -204,8 +204,6 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
 
         jButton1.setText("Pilih");
         jButton1.setActionCommand("pilih2");
-        jButton1.setMaximumSize(new java.awt.Dimension(51, 23));
-        jButton1.setMinimumSize(new java.awt.Dimension(51, 23));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

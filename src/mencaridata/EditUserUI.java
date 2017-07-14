@@ -20,6 +20,7 @@ public class EditUserUI extends javax.swing.JFrame {
         jTextField_namabaru.setText(nama);
         jTextField_usernamebaru.setText(username);
         jPasswordField_passbaru.setText(pass);
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

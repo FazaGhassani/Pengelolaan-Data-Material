@@ -10,6 +10,7 @@ public class DaftarUI extends javax.swing.JFrame {
 
     public DaftarUI() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     
     @SuppressWarnings("unchecked")
