@@ -182,7 +182,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 .addGroup(jPanel_hasilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_HapusPilihan)
                     .addComponent(jButton_hitung))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         jPanel_Pencarian.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pencarian", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -222,11 +222,6 @@ public class Name_SearcherUI extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
-            }
-        });
-        Tabel_HasilCari.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Tabel_HasilCariMouseClicked(evt);
             }
         });
         Tabel_HasilCari.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -338,12 +333,12 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                         .addComponent(jTextField_CariNama1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_Cari1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                        .addGap(0, 293, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton_input1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,11 +347,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField_CariNama1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Cari1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_input1)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Data Harga Material dan Pekerja", jPanel2);
@@ -756,17 +751,20 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem_eDataMasterActionPerformed
 
-    private void Tabel_HasilCariMouseClicked(java.awt.event.MouseEvent evt) {                                             
 
-    }                                            
 
-/*
     private void Tabel_HasilCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCariMouseClicked
         // TODO add your handling code here:
-          
+          if (evt.getClickCount() == 2 ){
+                Button bu = new Button();
+                //creating an actionevent
+                ActionEvent e = new ActionEvent((Object) bu, ActionEvent.ACTION_PERFORMED,"");
+                //calling hitung fx
+                jButton_inputActionPerformed(e);    
+        }         
     }//GEN-LAST:event_Tabel_HasilCariMouseClicked
-    }
-*/
+
+    
     private void Tabel_HasilCari1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCari1MouseClicked
         // TODO add your handling code here:
           if (evt.getClickCount() == 2 ){
@@ -775,7 +773,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 ActionEvent e = new ActionEvent((Object) buttone, ActionEvent.ACTION_PERFORMED,"");
                 //calling hitung fx
                 jButton_input1ActionPerformed(e);    
-    }                                            
+        }                                            
     }//GEN-LAST:event_Tabel_HasilCari1MouseClicked
     
 

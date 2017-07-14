@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
 
     DefaultTableModel model1;
-    //DefaultTableModel model2;
     DefaultTableModel model3;
     private String Username; private String Pass; private String Nama;
     private String material; private int volume; private String unit; private int harga;
@@ -44,12 +43,13 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
         jButton_Cari = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabel_HasilCari = new javax.swing.JTable();
+        jButton_pilih = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jTextField_CariNama1 = new javax.swing.JTextField();
         jButton_Cari1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tabel_HasilCari1 = new javax.swing.JTable();
-        jButton_pilih = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jButton_ubah = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -113,7 +113,19 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabel_HasilCari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabel_HasilCariMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tabel_HasilCari);
+
+        jButton_pilih.setText("Pilih");
+        jButton_pilih.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_pilihActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -126,6 +138,10 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
                 .addComponent(jButton_Cari)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +151,10 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
                     .addComponent(jTextField_CariNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Cari))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Data Harga PO", jPanel6);
@@ -176,7 +195,22 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabel_HasilCari1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabel_HasilCari1MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(Tabel_HasilCari1);
+
+        jButton1.setText("Pilih");
+        jButton1.setActionCommand("pilih2");
+        jButton1.setMaximumSize(new java.awt.Dimension(51, 23));
+        jButton1.setMinimumSize(new java.awt.Dimension(51, 23));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -189,6 +223,10 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
                 .addComponent(jButton_Cari1)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,35 +236,23 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
                     .addComponent(jTextField_CariNama1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Cari1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Data Harga Material", jPanel7);
-
-        jButton_pilih.setText("Pilih");
-        jButton_pilih.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_pilihActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane2)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton_pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 77, Short.MAX_VALUE))
+            .addComponent(jTabbedPane2)
         );
 
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -632,6 +658,55 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_pilihActionPerformed
 
+    private void Tabel_HasilCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCariMouseClicked
+        // TODO add your handling code here:
+          if (evt.getClickCount() == 2 ){
+                Button bu = new Button();
+                //creating an actionevent
+                ActionEvent e = new ActionEvent((Object) bu, ActionEvent.ACTION_PERFORMED,"");
+                //calling hitung fx
+                jButton_pilihActionPerformed(e);    
+        }
+    }//GEN-LAST:event_Tabel_HasilCariMouseClicked
+
+    private void Tabel_HasilCari1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCari1MouseClicked
+       // TODO add your handling code here:
+        if (evt.getClickCount() == 2 ){
+                Button bu = new Button();
+                //creating an actionevent
+                ActionEvent e = new ActionEvent((Object) bu, ActionEvent.ACTION_PERFORMED,"");
+                //calling hitung fx
+                jButton1ActionPerformed(e);    
+        }
+    }//GEN-LAST:event_Tabel_HasilCari1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (Tabel_HasilCari1.getSelectedRow() != -1) {
+            
+            Vector pilihan = (Vector) model3.getDataVector().elementAt(Tabel_HasilCari1.getSelectedRow());
+            
+            jTextField_jnspekerjaan.setText((String)pilihan.get(0));
+            jTextField_Volume.setText((String)pilihan.get(1));
+            jTextField_unit.setText((String)pilihan.get(2));
+            jTextField_hargasatuan.setText((String)pilihan.get(3));
+            
+            this.material = (String)pilihan.get(0);
+            String v = (String)pilihan.get(1); 
+            if(v.equals("1.0")) v=v.replace(".0", "");
+            this.volume = Integer.parseInt(v);
+            this.unit = (String)pilihan.get(2);
+            String h = (String)pilihan.get(3);
+            this.harga = Integer.parseInt(h.replace(".", ""));
+            if(jPanel6.isShowing()){
+                pili = 0;
+            }else if(jPanel7.isShowing()){
+                pili = 1;
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "SILAHKAN PILIH MATERIAL YANG AKAN DIUBAH", " ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     //menampilkan semua 
     private void SHOWALLDATA() {
         
@@ -679,6 +754,7 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabel_HasilCari;
     private javax.swing.JTable Tabel_HasilCari1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_Cari;
     private javax.swing.JButton jButton_Cari1;
     private javax.swing.JButton jButton_hapus;
