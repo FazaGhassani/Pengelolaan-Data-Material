@@ -16,15 +16,6 @@ public class showalldata {
     
     public showalldata(int tab) throws FileNotFoundException, IOException {
         mencarifile m = new mencarifile();
-        //File myFile = null;
-        
-        
-        
-        // Finds the workbook instance for XLSX file
-        //setmyWorkBook(fis);
-        
-        // Return first sheet from the XLSX workbook
-        //setmySheet(0);
         
         if(tab == 1){
             //myFile = m.findFile("C:\\", "Daftar_Harga_PO.xlsx");

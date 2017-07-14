@@ -731,7 +731,6 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
         for (int row = 0; row < data1.length; row++) {
             if (data1[row][0] != null) {
                 model1.addRow(data1[row]);
-                row++;
             }
         }
 
@@ -745,7 +744,6 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
         for (int row = 0; row < data2.length; row++) {
             if (data1[row][0] != null) {
                 model3.addRow(data2[row]);
-                row++;
             }
         }
     }

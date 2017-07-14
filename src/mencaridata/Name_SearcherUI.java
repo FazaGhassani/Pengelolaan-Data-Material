@@ -52,7 +52,6 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         for (int row = 0; row < data1.length; row++) {
             if (data1[row][0] != null) {
                 model1.addRow(data1[row]);
-                row++;
             }
         }
         //menampilkan semua data di tab 2
@@ -61,7 +60,6 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         for (int row = 0; row < data2.length; row++) {
             if (data1[row][0] != null) {
                 model3.addRow(data2[row]);
-                row++;
             }
         }
     }
@@ -452,7 +450,6 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             for (int row = 0; row < data1.length; row++) {
                 if (data1[row][0] != null) {
                     model1.addRow(data1[row]);
-                    row++;
                 }
             }
             JOptionPane.showMessageDialog(null, "MASUKAN KATA KUNCI PENCARIAN TERLEBIH DAHULU", " ", JOptionPane.WARNING_MESSAGE);
@@ -485,7 +482,6 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 for (int row = 0; row < s.length; row++) {
                     if (s[row][0] != null) {
                         model1.addRow(s[row]);
-                        row++;
                     }
                 }
             }
@@ -642,7 +638,6 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             for (int row = 0; row < data1.length; row++) {
                 if (data1[row][0] != null) {
                     model3.addRow(data1[row]);
-                    row++;
                 }
             }
             JOptionPane.showMessageDialog(null, "MASUKAN KATA KUNCI PENCARIAN TERLEBIH DAHULU", " ", JOptionPane.WARNING_MESSAGE);
@@ -675,7 +670,6 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 for (int row = 0; row < s.length; row++) {
                     if (s[row][0] != null) {
                         model3.addRow(s[row]);
-                        row++;
                     }
                 }
             }
