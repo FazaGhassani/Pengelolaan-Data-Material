@@ -45,23 +45,8 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         this.Username = username;
         this.Pass =pass;
         this.Nama = nama;
-
-        //menampilkan semua data di tab 1
-        showalldata show = new showalldata(1);
-        String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
-        for (int row = 0; row < data1.length; row++) {
-            if (data1[row][0] != null) {
-                model1.addRow(data1[row]);
-            }
-        }
-        //menampilkan semua data di tab 2
-        showalldata show1 = new showalldata(2);
-        String[][] data2 = show1.show(show1.getmySheet(), show1.getmyWorkBook());
-        for (int row = 0; row < data2.length; row++) {
-            if (data1[row][0] != null) {
-                model3.addRow(data2[row]);
-            }
-        }
+        
+        SHOWALLDATA();
     }
 
     @SuppressWarnings("unchecked")
@@ -431,26 +416,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
 
     private void jButton_CariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CariActionPerformed
         if (jTextField_CariNama.getText().equals("")) {
-            
-            //menghapus data di tabel hasil pencarian kalau ada isinya
-            if (model1.getRowCount() > 0) {
-                while (model1.getRowCount() > 0) {
-                    model1.removeRow(0);
-                }
-            }
-            
-            showalldata show = null;
             try {
-                show = new showalldata(1);
+                //menghapus data di tabel hasil pencarian kalau ada isinya
+                SHOWALLDATA();
             } catch (IOException ex) {
                 Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
-            for (int row = 0; row < data1.length; row++) {
-                if (data1[row][0] != null) {
-                    model1.addRow(data1[row]);
-                }
             }
             JOptionPane.showMessageDialog(null, "MASUKAN KATA KUNCI PENCARIAN TERLEBIH DAHULU", " ", JOptionPane.WARNING_MESSAGE);
         }else{
@@ -620,25 +590,10 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     private void jButton_Cari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cari1ActionPerformed
         if (jTextField_CariNama1.getText().equals("")) {
             
-            //menghapus data di tabel hasil pencarian kalau ada isinya
-            if (model3.getRowCount() > 0) {
-                while (model3.getRowCount() > 0) {
-                    model3.removeRow(0);
-                }
-            }
-            
-            showalldata show = null;
             try {
-                show = new showalldata(2);
+                SHOWALLDATA();
             } catch (IOException ex) {
                 Logger.getLogger(Name_SearcherUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
-            for (int row = 0; row < data1.length; row++) {
-                if (data1[row][0] != null) {
-                    model3.addRow(data1[row]);
-                }
             }
             JOptionPane.showMessageDialog(null, "MASUKAN KATA KUNCI PENCARIAN TERLEBIH DAHULU", " ", JOptionPane.WARNING_MESSAGE);
         }else{
@@ -746,7 +701,6 @@ public class Name_SearcherUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_eDataMasterActionPerformed
 
 
-
     private void Tabel_HasilCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCariMouseClicked
         // TODO add your handling code here:
           if (evt.getClickCount() == 2 ){
@@ -770,6 +724,35 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         }                                            
     }//GEN-LAST:event_Tabel_HasilCari1MouseClicked
     
+    private void SHOWALLDATA() throws IOException{
+        //menghapus data di tabel hasil pencarian kalau ada isinya
+        if (model1.getRowCount() > 0 || model3.getRowCount() > 0) {
+            while (model1.getRowCount() > 0) {
+                model1.removeRow(0);
+            }
+            while (model3.getRowCount() > 0) {
+                model3.removeRow(0);
+            }
+        }
+        
+        //menampilkan semua data di tab 1
+        showalldata show = new showalldata(1);
+        String[][] data1 = show.show(show.getmySheet(), show.getmyWorkBook());
+        for (int row = 0; row < data1.length; row++) {
+            if (data1[row][0] != null) {
+                model1.addRow(data1[row]);
+            }
+        }
+        //menampilkan semua data di tab 2
+        showalldata show1 = new showalldata(2);
+        String[][] data2 = show1.show(show1.getmySheet(), show1.getmyWorkBook());
+        for (int row = 0; row < data2.length; row++) {
+            if (data1[row][0] != null) {
+                model3.addRow(data2[row]);
+            }
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabel_HasilCari;
