@@ -88,7 +88,6 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1366, 768));
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         setSize(new java.awt.Dimension(1366, 768));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ubah / Hapus Data", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
@@ -244,7 +243,7 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_pilih, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 72, Short.MAX_VALUE))
+                .addGap(0, 77, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -426,6 +425,17 @@ public class EditDataMasterDeleteEditUI extends javax.swing.JFrame {
         a.ubahData(this.material, this.volume, this.unit, this.harga, 
                 jTextField_jnspekerjaan.getText(), Integer.parseInt(v), 
                 jTextField_unit.getText(), Integer.parseInt(h));
+
+        //menghapus data di tabel hasil pencarian kalau ada isinya
+        if (model1.getRowCount() > 0 || model3.getRowCount() > 0) {
+            while (model1.getRowCount() > 0) {
+                model1.removeRow(0);
+            }
+            while (model3.getRowCount() > 0) {
+                model3.removeRow(0);
+            }
+        }
+        
         
         //menampilkan semua data di tab 1
         showalldata show = null;
