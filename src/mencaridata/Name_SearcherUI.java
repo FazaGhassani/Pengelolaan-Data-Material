@@ -222,6 +222,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        Tabel_HasilCari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabel_HasilCariMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(Tabel_HasilCari);
 
         jButton_input.setText("Pilih");
@@ -738,6 +743,10 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         ui.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem_eDataMasterActionPerformed
+
+    private void Tabel_HasilCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCariMouseClicked
+
+    }//GEN-LAST:event_Tabel_HasilCariMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
