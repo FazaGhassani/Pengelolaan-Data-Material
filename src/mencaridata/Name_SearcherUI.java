@@ -8,6 +8,7 @@ package mencaridata;
 import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -208,7 +210,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -220,6 +222,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        Tabel_HasilCari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabel_HasilCariMouseClicked(evt);
             }
         });
         Tabel_HasilCari.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -304,6 +311,11 @@ public class Name_SearcherUI extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        Tabel_HasilCari1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabel_HasilCari1MouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(Tabel_HasilCari1);
@@ -744,10 +756,28 @@ public class Name_SearcherUI extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem_eDataMasterActionPerformed
 
+    private void Tabel_HasilCariMouseClicked(java.awt.event.MouseEvent evt) {                                             
+
+    }                                            
+
+/*
     private void Tabel_HasilCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCariMouseClicked
-
+        // TODO add your handling code here:
+          
     }//GEN-LAST:event_Tabel_HasilCariMouseClicked
-
+    }
+*/
+    private void Tabel_HasilCari1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabel_HasilCari1MouseClicked
+        // TODO add your handling code here:
+          if (evt.getClickCount() == 2 ){
+                Button buttone = new Button();
+                //creating an actionevent
+                ActionEvent e = new ActionEvent((Object) buttone, ActionEvent.ACTION_PERFORMED,"");
+                //calling hitung fx
+                jButton_input1ActionPerformed(e);    
+    }                                            
+    }//GEN-LAST:event_Tabel_HasilCari1MouseClicked
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Tabel_HasilCari;

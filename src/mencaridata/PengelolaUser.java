@@ -24,7 +24,7 @@ public class PengelolaUser {
         
         //mengambil data usrnm
         mencarifile m = new mencarifile();
-        myFile = "C:\\srnmnama.xlsx";
+        myFile = "C:\\db_java\\srnmnama.xlsx";
         //myFile = m.findFile("C:\\", "srnmnama.xlsx");
         FileInputStream fis = new FileInputStream(myFile);
         

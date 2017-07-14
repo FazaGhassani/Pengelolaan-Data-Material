@@ -1,5 +1,6 @@
 package mencaridata;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,6 +117,7 @@ public class LoginUI extends javax.swing.JFrame {
 
     private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
         // TODO add your handling code here:
+        jButton_ConfirmActionPerformed(evt);
     }//GEN-LAST:event_jPasswordFieldActionPerformed
 
     private void jButton_KembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_KembaliActionPerformed
@@ -155,4 +157,8 @@ public class LoginUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextField_Username;
     // End of variables declaration//GEN-END:variables
+
+    private void jButton_hitungActionPerformed(ActionEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
