@@ -608,7 +608,7 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             }
 
             //ditampung di string ini
-            String s[][] = a.Search_by_name(a.getmySheet(), a.getmyWorkBook(), nama);
+            String s1[][] = a.Search_by_name(a.getmySheet(), a.getmyWorkBook(), nama);
 
             //menghapus data di tabel hasil pencarian kalau ada isinya
             if (model3.getRowCount() > 0) {
@@ -618,13 +618,13 @@ public class Name_SearcherUI extends javax.swing.JFrame {
             }
 
             //mencoba menampilkan hasil pencarian
-            if (s[0][0] == null) {
+            if (s1[0][0] == null) {
                 JOptionPane.showMessageDialog(null, "TIDAK MENEMUKAN DATA YANG COCOK", " ", JOptionPane.WARNING_MESSAGE);
             } else {
                 //tampilkan nama yang sesuai di tabel
-                for (int row = 0; row < s.length; row++) {
-                    if (s[row][0] != null) {
-                        model3.addRow(s[row]);
+                for (int row = 0; row < s1.length; row++) {
+                    if (s1[row][0] != null) {
+                        model3.addRow(s1[row]);
                     }
                 }
             }
